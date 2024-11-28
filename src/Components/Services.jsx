@@ -3,7 +3,7 @@ import { assets } from "../assets/assets";
 
 const Services = () => {
   return (
-    <div className="bg-gray-100 py-12 px-6">
+    <div id="services"  className="bg-gray-100 py-12 px-6">
       {/* Heading */}
       <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
         Our Services
@@ -82,8 +82,9 @@ const Services = () => {
             </h3>
             <p className="text-gray-600 leading-relaxed">{service.description}</p>
           </div>
-        ))}
-      </div>
+        ))}  </div>        
+         
+         
     </div>
   );
 };

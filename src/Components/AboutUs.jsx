@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutUs = () => {
   return (
-    <div className="py-12 px-6 flex justify-center">
+    <div id="about"  className="py-12 px-6 flex justify-center">
       <div className="bg-white text-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-3xl p-8 md:p-12 max-w-4xl text-center">
         {/* Heading */}
         <h2 className="text-2xl text-primary md:text-4xl font-bold mb-6">
