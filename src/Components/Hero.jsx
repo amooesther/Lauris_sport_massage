@@ -1,5 +1,6 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   return (
@@ -22,9 +23,9 @@ const Hero = () => {
         <p className="text-lg md:text-2xl mb-6">
         Supporting a healthy and active you with targeted therapies to optimize your recovery and performance.
         </p>
-        <button className="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
+      <Link to='/booking'> <button className="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
           Book Now
-        </button>
+        </button></Link> 
       </div>
     </div>
   );

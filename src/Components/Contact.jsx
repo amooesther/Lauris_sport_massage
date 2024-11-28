@@ -1,5 +1,6 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   return (
@@ -97,12 +98,12 @@ const Contact = () => {
         </div>
 
         {/* Book Appointment Button */}
-        <button
+     <Link to='/booking'>  <button
           type="submit"
           className="w-full bg-primary text-2xl text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-dark transition-all shadow-md mt-8"
         >
           Book Now
-        </button>
+        </button></Link> 
       </div>
     </div>
   );

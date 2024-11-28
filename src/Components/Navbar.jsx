@@ -1,4 +1,5 @@
 import { assets } from "../assets/assets";
+import { Link} from "react-router-dom";
 
 const Navbar = () => {
   const handleScroll = (sectionId) => {
@@ -15,12 +16,12 @@ const Navbar = () => {
 
       {/* Navigation Links */}
       <ul className="hidden md:flex items-start gap-5 font-medium">
-        <li
+      <Link to='/'>  <li
           className="hover:text-primary cursor-pointer"
-          onClick={() => handleScroll("home")}
+         
         >
           Home
-        </li>
+        </li></Link>
         <li
           className="hover:text-primary cursor-pointer"
           onClick={() => handleScroll("about")}
@@ -42,9 +43,9 @@ const Navbar = () => {
       </ul>
 
       {/* Button */}
-      <button className="bg-primary text-white font-semibold border-none flex w-48 items-center px-6 py-2.5 rounded-md text-center text-sm hover:scale-105 transition-all duration-300">
+   <Link to='/booking'>  <button className="bg-primary text-white font-semibold border-none flex w-48 items-center px-6 py-2.5 rounded-md text-center text-sm hover:scale-105 transition-all duration-300">
         Book Appointment
-      </button>
+      </button></Link> 
     </div>
   );
 };
