@@ -129,7 +129,7 @@ const Appointments = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
+            className="w-full bg-primary text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
           >
             Book Appointment
           </button>
