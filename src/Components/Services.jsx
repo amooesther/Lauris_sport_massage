@@ -95,7 +95,7 @@ const Services = () => {
   return (
     <motion.div
       id="services"
-      className="bg-primary py-12 px-6"
+      className="bg-primary py-12 px-4 sm:px-2" // Updated padding for smaller screens
       initial="hidden"
       whileInView="visible"
       variants={containerVariants}
