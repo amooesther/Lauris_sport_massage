@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 
 const Supports = () => {
   return (
-    <div className="bg-primary rounded-full shadow-xl mt-8 text-white py-12 px-6 flex flex-col justify-center items-center">
+    <div className="bg-primary rounded-full shadow-xl mt-8  text-white py-12 px-6 flex flex-col justify-center items-center">
       {/* Heading */}
       <motion.h2
-        className="text-2xl md:text-4xl font-bold mb-6 text-center"
+        className="text-2xl md:text-4xl mt-5  font-bold mb-2 text-center"
         initial={{ opacity: 0, y: -30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
