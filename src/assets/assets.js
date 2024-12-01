@@ -1,5 +1,5 @@
 import logo from '../assets/Lauris.png';
-import hero_img from '../assets/hero_img.jpg';
+import hero_img from '../assets/hero_img.webp';
 import deep_tissue from '../assets/deep_tissue.jpg';
 import event from '../assets/event.jpg';
 import injury_rehabilitation from '../assets/injury_rehabilitation.jpg';
