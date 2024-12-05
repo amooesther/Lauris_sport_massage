@@ -1,7 +1,10 @@
 import Footer from "./Components/Footer"
 import Navbar from "./Components/Navbar"
+import AdminDashboard from "./Pages/AdminDashboard"
 import Appointment from "./Pages/Appointment"
 import Home from "./Pages/Home"
+import Login from "./Pages/Login"
+import Schedule from "./Pages/Schedule"
 import { assets } from "./assets/assets"
 import { Route, Routes } from "react-router-dom"
 
@@ -15,6 +18,9 @@ function App() {
         <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/booking' element={<Appointment />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/book' element={<Schedule/>} />
+        <Route path='/admin' element={<AdminDashboard/>} />
         </Routes>         
          <Footer/>
          <a
