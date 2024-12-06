@@ -75,7 +75,7 @@ const services = [
     title: "Relaxation Massage",
     img: assets.relaxation,
     description:
-      "Combines soothing techniques to reduce stress and promote overall well-being. A great option for anyone needing to unwind and rejuvenate.",
+      "We combine soothing techniques to reduce stress and promote overall well-being. A great option for anyone needing to unwind and rejuvenate.",
   },
   {
     title: "Joint Mobilization",

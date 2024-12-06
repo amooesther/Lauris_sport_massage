@@ -4,62 +4,98 @@ import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 
 const Hero = () => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeInOut" },
+    },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, x: -50 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 1, ease: "easeInOut", delay: 0.3 },
+    },
+  };
+
+  const buttonVariants = {
+    hover: {
+      scale: 1.1,
+      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+      transition: { duration: 0.3, yoyo: Infinity },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 1.2, ease: "easeInOut" },
+    },
+  };
+
   return (
-    <div className="relative h-screen flex flex-col items-center justify-center text-white">
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${assets.hero_img})` }}
-      ></div>
-
-      {/* Overlay for Darkening Effect */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center">
-        {/* Animate the h1 */}
-        <motion.h1
-          className="text-4xl md:text-6xl font-bold mb-4"
-          initial={{ x: "-100%", opacity: 0 }}
-          whileInView={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+    <motion.div
+      className="flex flex-col md:flex-row items-center h-[80vh] gap-8 px-6 py-5 bg-green-50 text-gray-800"
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Left Content */}
+      <motion.div
+        className="flex-1 text-center md:text-left"
+        variants={containerVariants}
+      >
+        <motion.h2
+          className="text-3xl md:text-5xl font-bold text-primary"
+          variants={textVariants}
         >
           Lauris Sport Massage Therapy
-        </motion.h1>
-
-        {/* Animate the first paragraph */}
-        <motion.p
-          className="text-2xl md:text-3xl mb-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 1.5, delay: 0.5 }}
+        </motion.h2>
+        <motion.h4
+          className="text-xl md:text-2xl font-semibold text-secondary mt-4"
+          variants={textVariants}
         >
           Move Better. Feel Stronger.
-        </motion.p>
-
-        {/* Animate the second paragraph */}
+        </motion.h4>
         <motion.p
-          className="text-lg md:text-2xl mb-6"
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5, delay: 1 }}
+          className="text-base md:text-lg mt-4 leading-relaxed"
+          variants={textVariants}
         >
-          Supporting a healthy and active you with targeted therapies to optimize your recovery and performance.
+          Supporting a healthy and active you with targeted therapies to optimize
+          your recovery and performance.
         </motion.p>
-
-        {/* Animate the button */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1, delay: 1.5 }}
-        >
-          <Link to="/booking">
-            <button className="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg">
-              Book Now
-            </button>
+        <motion.div variants={textVariants}>
+          <Link to="/book">
+            <motion.button
+              className="mt- px-6 py-3 bg-primary lg:mt-10 text-secondary font-bold rounded-md shadow-lg hover:bg-secondary transition duration-300"
+              variants={buttonVariants}
+              whileHover="hover"
+            >
+              BOOK NOW
+            </motion.button>
           </Link>
         </motion.div>
-      </div>
-    </div>
+      </motion.div>
+
+      {/* Right Content */}
+      <motion.div
+        className="flex-1 text-center"
+        variants={imageVariants}
+      >
+        <motion.img
+          src={assets.hero_img}
+          alt="Sports Massage Therapy"
+          className="max-w-full h-auto rounded-lg shadow-2xl"
+          variants={imageVariants}
+        />
+      </motion.div>
+    </motion.div>
   );
 };
 
