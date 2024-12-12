@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
+import React, { useState } from 'react';
 import { useAppointments } from '../Context/AppointmentContext';
 
 const Appointments = () => {
@@ -9,42 +8,24 @@ const Appointments = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
 
-  const appointmentForm = useRef();
   const { addAppointment } = useAppointments();
 
-  const sendEmail = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        'service_0rahifn', // Replace with your EmailJS service ID
-        'template_hls7s9r', // Replace with your EmailJS template ID
-        appointmentForm.current,
-        'tHBP6nMQyW1EAuaxd' // Replace with your EmailJS public key
-      )
-      .then(
-        (result) => {
-          console.log('SUCCESS!', result.text);
+    const appointment = { name, email, phone, date, time };
 
-          const appointment = { name, email, phone, date, time };
+    // Save appointment to context or local state
+    addAppointment(appointment);
 
-          // Save appointment to context or local state
-          addAppointment(appointment);
+    // Clear form inputs
+    setName('');
+    setEmail('');
+    setPhone('');
+    setDate('');
+    setTime('');
 
-          // Clear form inputs
-          setName('');
-          setEmail('');
-          setPhone('');
-          setDate('');
-          setTime('');
-
-          alert('Your appointment has been successfully booked. Thank you for choosing Lauris Sport Massage Therapy!');
-        },
-        (error) => {
-          console.log('FAILED...', error.text);
-          alert('Failed to book appointment. Please try again later.');
-        }
-      );
+    alert('Your appointment has been successfully booked. Thank you for choosing Lauris Sport Massage Therapy!');
   };
 
   return (
@@ -56,7 +37,7 @@ const Appointments = () => {
         <p className="text-center text-gray-600 mb-6">
           Or call us on <span className="font-bold text-indigo-600">+44 7391 530988</span>
         </p>
-        <form ref={appointmentForm} onSubmit={sendEmail} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="name">
               Full Name
@@ -64,7 +45,6 @@ const Appointments = () => {
             <input
               type="text"
               id="name"
-              name="user_name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -78,7 +58,6 @@ const Appointments = () => {
             <input
               type="email"
               id="email"
-              name="user_email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -92,7 +71,6 @@ const Appointments = () => {
             <input
               type="tel"
               id="phone"
-              name="phone_number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -106,7 +84,6 @@ const Appointments = () => {
             <input
               type="date"
               id="date"
-              name="appointment_date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -120,7 +97,6 @@ const Appointments = () => {
             <input
               type="time"
               id="time"
-              name="appointment_time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -129,7 +105,7 @@ const Appointments = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-primary text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
+            className="w-full bg-primary text-secondary font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
           >
             Book Appointment
           </button>

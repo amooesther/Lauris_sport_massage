@@ -9,7 +9,6 @@ const AdminDashboard = () => {
   const [showScheduleForm, setShowScheduleForm] = useState(false);
   const { addAppointment, removeAppointment } = useAppointments();
 
-  // Fetch appointments from Firestore on component mount
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -25,7 +24,7 @@ const AdminDashboard = () => {
     };
 
     fetchAppointments();
-  }, []); // Empty dependency array means this runs only once when the component mounts
+  }, []);
 
   const handleAddAppointmentClick = () => {
     setShowScheduleForm(true);
@@ -42,10 +41,8 @@ const AdminDashboard = () => {
             : appointment
         )
       );
-      alert('Appointment has been canceled');
     } catch (error) {
       console.error('Error canceling appointment:', error);
-      alert('Failed to cancel appointment');
     }
   };
 
@@ -56,50 +53,72 @@ const AdminDashboard = () => {
       setAppointments((prevAppointments) =>
         prevAppointments.filter((appointment) => appointment.id !== appointmentId)
       );
-      alert('Appointment has been deleted');
     } catch (error) {
       console.error('Error deleting appointment:', error);
-      alert('Failed to delete appointment');
+    }
+  };
+
+  const handleConfirmAppointment = async (appointmentId) => {
+    try {
+      const appointmentDoc = doc(db, 'appointments', appointmentId);
+      await updateDoc(appointmentDoc, { status: 'Confirmed' });
+      setAppointments((prevAppointments) =>
+        prevAppointments.map((appointment) =>
+          appointment.id === appointmentId
+            ? { ...appointment, status: 'Confirmed' }
+            : appointment
+        )
+      );
+    } catch (error) {
+      console.error('Error confirming appointment:', error);
     }
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-green-100">
       {/* Sidebar */}
-      <div className="w-64 bg-gray-800 text-white p-6 hidden lg:block">
-        <h2 className="text-2xl font-semibold mb-8">Admin Dashboard</h2>
+      <div className="w-full lg:w-44 bg-secondary text-white p-6">
+        <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
         <ul>
           <li className="mb-4">
-            <a href="/" className="hover:text-blue-400">Dashboard</a>
+            <a href="/" className="block py-2 px-4 rounded hover:bg-gray-700">
+              Dashboard
+            </a>
           </li>
           <li className="mb-4">
-            <a href="/appointments" className="hover:text-blue-400">Appointments</a>
+            <a href="/appointments" className="block py-2 px-4 rounded hover:bg-gray-700">
+              Appointments
+            </a>
           </li>
           <li className="mb-4">
-            <a href="/users" className="hover:text-blue-400">Users</a>
+            <a href="/users" className="block py-2 px-4 rounded hover:bg-gray-700">
+              Users
+            </a>
           </li>
           <li className="mb-4">
-            <a href="/settings" className="hover:text-blue-400">Settings</a>
+            <a href="/settings" className="block py-2 px-4 rounded hover:bg-gray-700">
+              Settings
+            </a>
           </li>
         </ul>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 bg-gray-100 p-6">
+      <div className="flex-1 p-4 lg:p-4">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-semibold text-gray-800">Appointments</h1>
+          <h1 className="text-2xl font-semibold text-gray-800">Appointments</h1>
           <button
             onClick={handleAddAppointmentClick}
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+            className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:ring focus:ring-blue-300"
           >
             Add Appointment
           </button>
         </div>
 
-        <div className="overflow-x-auto bg-white shadow-lg rounded-lg mb-6">
+        <div className="overflow-x-auto bg-white shadow-md rounded-lg">
           <table className="min-w-full table-auto">
             <thead>
-              <tr className="bg-gray-200">
+              <tr className="bg-gray-200 text-gray-600 text-sm">
                 <th className="px-4 py-2 text-left">Name</th>
                 <th className="px-4 py-2 text-left">Email</th>
                 <th className="px-4 py-2 text-left">Phone</th>
@@ -110,35 +129,41 @@ const AdminDashboard = () => {
             </thead>
             <tbody>
               {appointments.map((appointment) => (
-                <tr key={appointment.id}>
+                <tr key={appointment.id} className="text-sm">
                   <td className="px-4 py-2">{appointment.name}</td>
                   <td className="px-4 py-2">{appointment.email}</td>
                   <td className="px-4 py-2">{appointment.phone}</td>
                   <td className="px-4 py-2">{appointment.date}</td>
-                  <td className="px-4 py-2 text-green-500">
+                  <td className="px-4 py-2">
                     {appointment.status === 'Cancelled' ? (
                       <span className="text-red-500">Cancelled</span>
                     ) : (
-                      'Confirmed'
+                      <span className="text-green-500">Confirmed</span>
                     )}
                   </td>
-                  <td className="px-4 py-2">
+                  <td className="px-4 py-2 flex  gap-2">
                     {appointment.status !== 'Cancelled' && (
                       <>
                         <button
                           onClick={() => handleCancelAppointment(appointment.id)}
-                          className="bg-yellow-500 text-white px-3 py-1 rounded-lg hover:bg-yellow-600 mr-2"
+                          className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
                         >
                           Cancel
                         </button>
                         <button
-                          onClick={() => handleDeleteAppointment(appointment.id)}
-                          className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600"
+                          onClick={() => handleConfirmAppointment(appointment.id)}
+                          className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                         >
-                          Delete
+                          Confirm
                         </button>
                       </>
                     )}
+                    <button
+                      onClick={() => handleDeleteAppointment(appointment.id)}
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
@@ -148,7 +173,7 @@ const AdminDashboard = () => {
 
         {showScheduleForm && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-10">
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
               <Schedule />
               <button
                 onClick={() => setShowScheduleForm(false)}

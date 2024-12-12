@@ -67,11 +67,11 @@ const Hero = () => {
           className="text-base md:text-lg mt-4 leading-relaxed"
           variants={textVariants}
         >
-          Supporting a healthy and active you with targeted therapies to optimize
-          your recovery and performance.
+         <p>Revitalize your body and mind with expert sports massage therapy. Whether you're an athlete or seeking relief from everyday tension, Lauris Sport Massage Therapy Center is here to keep you moving at your best.</p>
+
         </motion.p>
         <motion.div variants={textVariants}>
-          <Link to="/book">
+          <Link to="/booking">
             <motion.button
               className="mt- px-6 py-3 bg-primary lg:mt-10 text-secondary font-bold rounded-md shadow-lg hover:bg-secondary transition duration-300"
               variants={buttonVariants}

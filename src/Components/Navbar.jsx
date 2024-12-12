@@ -1,61 +1,92 @@
-import { useState } from "react";
-import { assets } from "../assets/assets";
-import { Link } from "react-router-dom";
-import { FaBars, FaTimes } from "react-icons/fa";
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom'; 
+import { useUser } from '../Context/UserContext'; // Import useUser
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
+import { useNavigate } from 'react-router-dom';
+import { assets } from '../assets/assets';
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, setUser, setUserRole } = useUser(); // Get user and setUser from context
+  const navigate = useNavigate(); // For redirecting
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track menu visibility
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const handleLogout = async () => {
+    await signOut(auth); // Log the user out from Firebase
+    setUser(null); // Clear user state
+    setUserRole(null); // Clear userRole state
+    navigate('/login'); // Redirect to login page
   };
 
   return (
-    <div className="flex items-center justify-between text-sm py-4 mb-5 border-b border-b-primary relative">
-      {/* Logo */}
+    <div className="flex items-center justify-between py-4 mb-5 border-b">
       <Link to="/">
         <img className="cursor-pointer w-30 h-16" src={assets.logo} alt="Logo" />
       </Link>
-
-      {/* Navigation Links */}
-      <ul
-        className={`absolute top-full left-0 w-full bg-white text-black shadow-lg flex flex-col items-center gap-5 font-medium transition-transform duration-300 md:static md:flex-row md:bg-transparent md:text-sm md:shadow-none md:flex md:justify-center ${
-          isMenuOpen ? "translate-y-0" : "-translate-y-[200%]"
-        } md:translate-y-0`}
-      >
-        <Link to="/">
-          <li className="cursor-pointer hover:text-primary">Home</li>
-        </Link>
-        <Link to="/about">
-          <li className="cursor-pointer hover:text-primary">About</li>
-        </Link>
-        <Link to="/services">
-          <li className="cursor-pointer hover:text-primary">Services</li>
-        </Link>
-        <Link to="/contact">
-          <li className="cursor-pointer hover:text-primary">Contact</li>
-        </Link>
-        <Link to="/my-appointment">
-          <li className="cursor-pointer hover:text-primary">My Appointments</li>
-        </Link>
-         {/* Sign In Button */}
-      <Link to="/login">
-        <button className="bg-primary text-secondary justify-center font-semibold border-none flex w-36 items-center px-6 py-2.5 rounded-md text-sm hover:scale-105 transition-all duration-300">
-          Sign In
+      
+      {/* Hamburger menu button for small screens */}
+      <div className="lg:hidden flex items-center">
+        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-2xl">
+          {isMenuOpen ? '×' : '☰'} {/* Show close icon when menu is open */}
         </button>
-      </Link>
+      </div>
 
+      {/* Navigation links */}
+      <ul className={`lg:flex gap-5 ${isMenuOpen ? 'block' : 'hidden'} lg:block`}>
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-secondary hover:text-primary underline transition-all duration-300'
+              : 'hover:text-secondary transition-all duration-300'
+          }
+        >
+          <li>Home</li>
+        </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-secondary hover:text-primary underline transition-all duration-300'
+              : 'hover:text-secondary transition-all duration-300'
+          }
+        >
+          <li>About</li>
+        </NavLink>
+        <NavLink
+          to="/services"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-secondary hover:text-primary underline transition-all duration-300'
+              : 'hover:text-secondary transition-all duration-300'
+          }
+        >
+          <li>Services</li>
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-secondary underline hover:text-primary transition-all duration-300'
+              : 'hover:text-secondary transition-all duration-300'
+          }
+        >
+          <li>Contact</li>
+        </NavLink>
       </ul>
 
-     
-      {/* Hamburger Menu Icon for Small Screens */}
-      <div className="md:hidden cursor-pointer" onClick={toggleMenu}>
-        {isMenuOpen ? (
-          <FaTimes className="text-2xl text-primary" />
-        ) : (
-          <FaBars className="text-2xl text-primary" />
-        )}
-      </div>
+      {/* Conditional Sign In / Log Out Button */}
+      {user ? (
+        <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded-md">
+          Log Out
+        </button>
+      ) : (
+        <Link to="/login">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded-md">
+            Sign In
+          </button>
+        </Link>
+      )}
     </div>
   );
 };

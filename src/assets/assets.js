@@ -21,12 +21,14 @@ import choose_img from '../assets/choose_img.jpg'
 import foot_massage from '../assets/foot_massage.jpg'
 import about from '../assets/about.jpg'
 import about2 from '../assets/about2.jpg'
+import contact_bg from '../assets/contact_bg.jpg'
+import serv_img from '../assets/serv_img.jpg'
 
 
 
 
 export const assets={
-    logo,hero_img,deep_tissue,about,event,injury_rehabilitation,chats_icon,
+    logo,hero_img,serv_img,contact_bg,deep_tissue,about,event,injury_rehabilitation,chats_icon,
     joint,about2,personalize,post_event,relaxation,sport_performance,trigger,
     Phone_icon,location_icon,foot_massage,clock,mail,logo_white,landing_page,choose,choose_img
     

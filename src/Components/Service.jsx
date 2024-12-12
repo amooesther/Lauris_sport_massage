@@ -53,8 +53,8 @@ const Service = () => {
 
       {/* Styled Button */}
       <div className="text-center mt-12">
-     <Link to='/book'><button className="bg-primary text-secondary py-3 px-8 rounded text-lg font-semibold shadow-md hover:bg-primary-dark hover:shadow-lg transition duration-300 transform hover:scale-105"> 
-          Book Now
+     <Link to='/services'><button className="bg-primary text-secondary py-3 px-8 rounded text-lg font-semibold shadow-md hover:bg-primary-dark hover:shadow-lg transition duration-300 transform hover:scale-105"> 
+          VIEW MORE
         </button></Link>
       </div>
     </div>
