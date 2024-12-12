@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { assets } from '../assets/assets';
 
 const Navbar = () => {
-  const { user, setUser, setUserRole } = useUser(); // Get user and setUser from context
+  const { user, userRole, setUser, setUserRole } = useUser(); // Get user and userRole from context
   const navigate = useNavigate(); // For redirecting
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track menu visibility
 
@@ -73,6 +73,30 @@ const Navbar = () => {
         >
           <li>Contact</li>
         </NavLink>
+        <NavLink
+          to="/my-appointment"
+          className={({ isActive }) =>
+            isActive
+              ? 'text-secondary underline hover:text-primary transition-all duration-300'
+              : 'hover:text-secondary transition-all duration-300'
+          }
+        >
+          <li>My Appointments</li>
+        </NavLink>
+
+        {/* Admin Button - only visible if the user is an admin */}
+        {userRole === 'admin' && (
+          <NavLink
+            to="/admin"
+            className={({ isActive }) =>
+              isActive
+                ? 'text-secondary hover:text-primary underline transition-all duration-300'
+                : 'hover:text-secondary transition-all duration-300'
+            }
+          >
+            <li>Admin</li>
+          </NavLink>
+        )}
       </ul>
 
       {/* Conditional Sign In / Log Out Button */}

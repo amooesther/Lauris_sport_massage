@@ -1,6 +1,5 @@
-import React, { useState, useRef } from 'react';
-import emailjs from '@emailjs/browser';
-import { db, collection, addDoc } from '../firebase'; // Firebase import
+import React, { useState } from 'react';
+import { db, collection, addDoc, auth } from '../firebase'; // Firebase imports
 import { useAppointments } from '../Context/AppointmentContext';
 
 const Schedule = () => {
@@ -9,32 +8,33 @@ const Schedule = () => {
   const [phone, setPhone] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const appointmentForm = useRef();
   const { addAppointment } = useAppointments();
 
-  const sendEmail = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      // Send email using emailjs
-      const result = await emailjs.sendForm(
-        'service_0rahifn',
-        'template_hls7s9r',
-        appointmentForm.current,
-        'tHBP6nMQyW1EAuaxd'
-      );
-      console.log('SUCCESS!', result.text);
-
-      // Save the appointment to Firestore
-      const appointment = { name, email, phone, date, time };
-      console.log('Sending appointment data to Firestore:', appointment);
+      // Prepare appointment object with status
+      const appointment = {
+        name,
+        email,
+        phone,
+        date,
+        time,
+        userId: auth.currentUser?.uid || null, // Optional user association
+        createdAt: new Date().toISOString(),
+        status: 'Pending', // Set the default status as 'Pending'
+      };
 
       // Save the appointment to Firestore
       await addDoc(collection(db, 'appointments'), appointment);
+      console.log('Appointment saved to Firestore:', appointment);
 
-      // Save appointment to context or local state (optional)
-      addAppointment(appointment);
+      // Optional: Save to context or local state
+      addAppointment?.(appointment);
 
       // Clear form inputs
       setName('');
@@ -45,8 +45,10 @@ const Schedule = () => {
 
       alert('Your appointment has been successfully booked. Thank you for choosing Lauris Sport Massage Therapy!');
     } catch (error) {
-      console.error('FAILED...', error); // More descriptive error
-      alert('Failed to book appointment. Please try again later.');
+      console.error('Failed to book appointment:', error);
+      alert('Failed to book appointment. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -59,7 +61,7 @@ const Schedule = () => {
         <p className="text-center text-gray-600 mb-6">
           Or call us on <span className="font-bold text-indigo-600">+44 7391 530988</span>
         </p>
-        <form ref={appointmentForm} onSubmit={sendEmail} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="name">
               Full Name
@@ -67,7 +69,6 @@ const Schedule = () => {
             <input
               type="text"
               id="name"
-              name="user_name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -81,7 +82,6 @@ const Schedule = () => {
             <input
               type="email"
               id="email"
-              name="user_email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -95,7 +95,6 @@ const Schedule = () => {
             <input
               type="tel"
               id="phone"
-              name="phone_number"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -109,7 +108,6 @@ const Schedule = () => {
             <input
               type="date"
               id="date"
-              name="appointment_date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -123,7 +121,6 @@ const Schedule = () => {
             <input
               type="time"
               id="time"
-              name="appointment_time"
               value={time}
               onChange={(e) => setTime(e.target.value)}
               className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
@@ -132,9 +129,10 @@ const Schedule = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-primary text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
+            className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
+            disabled={loading}
           >
-            Book Appointment
+            {loading ? 'Booking...' : 'Book Appointment'}
           </button>
         </form>
       </div>

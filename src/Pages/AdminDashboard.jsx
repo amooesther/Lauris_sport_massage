@@ -9,6 +9,7 @@ const AdminDashboard = () => {
   const [showScheduleForm, setShowScheduleForm] = useState(false);
   const { addAppointment, removeAppointment } = useAppointments();
 
+  // Fetch appointments when the component loads
   useEffect(() => {
     const fetchAppointments = async () => {
       try {
@@ -30,17 +31,26 @@ const AdminDashboard = () => {
     setShowScheduleForm(true);
   };
 
+  // Fetch appointments after any update (confirm or cancel)
+  const fetchAppointments = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, 'appointments'));
+      const fetchedAppointments = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setAppointments(fetchedAppointments);
+    } catch (error) {
+      console.error('Error fetching appointments:', error);
+    }
+  };
+
   const handleCancelAppointment = async (appointmentId) => {
     try {
       const appointmentDoc = doc(db, 'appointments', appointmentId);
       await updateDoc(appointmentDoc, { status: 'Cancelled' });
-      setAppointments((prevAppointments) =>
-        prevAppointments.map((appointment) =>
-          appointment.id === appointmentId
-            ? { ...appointment, status: 'Cancelled' }
-            : appointment
-        )
-      );
+      console.log(`Appointment ${appointmentId} cancelled!`);
+      fetchAppointments(); // Fetch updated appointments
     } catch (error) {
       console.error('Error canceling appointment:', error);
     }
@@ -53,6 +63,7 @@ const AdminDashboard = () => {
       setAppointments((prevAppointments) =>
         prevAppointments.filter((appointment) => appointment.id !== appointmentId)
       );
+      console.log(`Appointment ${appointmentId} deleted!`);
     } catch (error) {
       console.error('Error deleting appointment:', error);
     }
@@ -62,13 +73,8 @@ const AdminDashboard = () => {
     try {
       const appointmentDoc = doc(db, 'appointments', appointmentId);
       await updateDoc(appointmentDoc, { status: 'Confirmed' });
-      setAppointments((prevAppointments) =>
-        prevAppointments.map((appointment) =>
-          appointment.id === appointmentId
-            ? { ...appointment, status: 'Confirmed' }
-            : appointment
-        )
-      );
+      console.log(`Appointment ${appointmentId} confirmed!`);
+      fetchAppointments(); // Fetch updated appointments
     } catch (error) {
       console.error('Error confirming appointment:', error);
     }
@@ -118,11 +124,12 @@ const AdminDashboard = () => {
         <div className="overflow-x-auto bg-white shadow-md rounded-lg">
           <table className="min-w-full table-auto">
             <thead>
-              <tr className="bg-gray-200 text-gray-600 text-sm">
+              <tr className="bg-green-200 text-gray-600 text-sm">
                 <th className="px-4 py-2 text-left">Name</th>
                 <th className="px-4 py-2 text-left">Email</th>
                 <th className="px-4 py-2 text-left">Phone</th>
                 <th className="px-4 py-2 text-left">Date</th>
+                <th className="px-4 py-2 text-left">Time</th>
                 <th className="px-4 py-2 text-left">Status</th>
                 <th className="px-4 py-2 text-left">Actions</th>
               </tr>
@@ -131,28 +138,31 @@ const AdminDashboard = () => {
               {appointments.map((appointment) => (
                 <tr key={appointment.id} className="text-sm">
                   <td className="px-4 py-2">{appointment.name}</td>
-                  <td className="px-4 py-2">{appointment.email}</td>
+                  <td className="px-2 py-2 text-[12px]">{appointment.email}</td>
                   <td className="px-4 py-2">{appointment.phone}</td>
                   <td className="px-4 py-2">{appointment.date}</td>
+                  <td className="px-4 py-2">{appointment.time}</td>
                   <td className="px-4 py-2">
                     {appointment.status === 'Cancelled' ? (
                       <span className="text-red-500">Cancelled</span>
-                    ) : (
+                    ) : appointment.status === 'Confirmed' ? (
                       <span className="text-green-500">Confirmed</span>
+                    ) : (
+                      <span className="text-yellow-500">Pending</span>
                     )}
                   </td>
-                  <td className="px-4 py-2 flex  gap-2">
-                    {appointment.status !== 'Cancelled' && (
+                  <td className="px-4 py-2 flex gap-2">
+                    {appointment.status !== 'Cancelled' && appointment.status !== 'Confirmed' && (
                       <>
                         <button
                           onClick={() => handleCancelAppointment(appointment.id)}
-                          className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600"
+                          className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
                         >
                           Cancel
                         </button>
                         <button
                           onClick={() => handleConfirmAppointment(appointment.id)}
-                          className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                          className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
                         >
                           Confirm
                         </button>
@@ -160,7 +170,7 @@ const AdminDashboard = () => {
                     )}
                     <button
                       onClick={() => handleDeleteAppointment(appointment.id)}
-                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
                     >
                       Delete
                     </button>

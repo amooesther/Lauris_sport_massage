@@ -24,9 +24,9 @@ function App() {
           <Route path="/about" element={<AboutUs />} />
           <Route path="/services" element={<Services />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/booking" element={<Appointment />} />
+          {/* <Route path="/booking" element={<Appointment />} /> */}
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/book" element={<Schedule />} /> */}
+          <Route path="/book" element={<Schedule />} />
           
           {/* Protected Route for Admin Dashboard */}
           <Route 

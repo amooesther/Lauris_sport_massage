@@ -71,9 +71,9 @@ const Hero = () => {
 
         </motion.p>
         <motion.div variants={textVariants}>
-          <Link to="/booking">
+          <Link to="/book">
             <motion.button
-              className="mt- px-6 py-3 bg-primary lg:mt-10 text-secondary font-bold rounded-md shadow-lg hover:bg-secondary transition duration-300"
+              className="mt- px-6 py-3 bg-primary lg:mt-10 text-secondary font-bold rounded-md shadow-lg hover:bg-secondary hover:text-white transition duration-300"
               variants={buttonVariants}
               whileHover="hover"
             >
