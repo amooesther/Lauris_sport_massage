@@ -87,7 +87,7 @@ const AdminDashboard = () => {
         <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
         <ul>
           <li className="mb-4">
-            <a href="/" className="block py-2 px-4 rounded hover:bg-gray-700">
+            <a href="/admin" className="block py-2 px-4 rounded hover:bg-gray-700">
               Dashboard
             </a>
           </li>
