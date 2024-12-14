@@ -32,7 +32,7 @@ const Footer = () => {
             <div className="flex items-center justify-center md:justify-start gap-4">
               <FaEnvelope className="w-5 h-5 text-white" />
               <p>
-                <a href="mailto:info@laurissmassagetherapy.com" className="hover:text-gray-200 transition-colors">
+                <a href="mailto:info@laurismassagetherapy.com" className="hover:text-gray-200 transition-colors text-[14px]">
                   info@laurissportmassagetherapy.com
                 </a>
               </p>
