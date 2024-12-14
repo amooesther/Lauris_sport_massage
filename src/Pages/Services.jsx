@@ -138,13 +138,13 @@ const Services = () => {
         variants={containerVariants}
       >
         <motion.h2
-          className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12"
+          className="text-3xl md:text-4xl font-bold text-center text-primary mb-12"
           variants={headingVariants}
         >
           Our Services
         </motion.h2>
         <motion.div
-          className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          className="grid gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 "
           variants={containerVariants}
         >
           {services.map((service, index) => (
@@ -158,7 +158,7 @@ const Services = () => {
                 alt={service.title}
                 className="w-full h-40 object-cover rounded-t-lg mb-4"
               />
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">
+              <h3 className="text-xl font-semibold text-primary mb-3">
                 {service.title}
               </h3>
               <p className="text-gray-600 leading-relaxed">{service.description}</p>

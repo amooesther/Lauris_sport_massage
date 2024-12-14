@@ -32,8 +32,8 @@ const Footer = () => {
             <div className="flex items-center justify-center md:justify-start gap-4">
               <FaEnvelope className="w-5 h-5 text-white" />
               <p>
-                <a href="mailto:info@laurismassagetherapy.com" className="hover:text-gray-200 transition-colors">
-                  info@laurismassagetherapy.com
+                <a href="mailto:info@laurissmassagetherapy.com" className="hover:text-gray-200 transition-colors">
+                  info@laurissportmassagetherapy.com
                 </a>
               </p>
             </div>
@@ -41,7 +41,7 @@ const Footer = () => {
             <div className="flex items-start justify-center md:justify-start gap-4">
               <FaMapMarkerAlt className="w-5 h-5 text-white" />
               <p className="text-center md:text-left">
-                38 Fox Street, Rothwell, <br />
+                Fox Street, Rothwell, <br />
                 Kettering, Northamptonshire, <br />
                 England, United Kingdom
               </p>
