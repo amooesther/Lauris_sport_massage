@@ -50,75 +50,58 @@ const ContactUs = () => {
   };
 
   return (
-    <div>
+    <div className="bg-gray-100">
       {/* Hero Section */}
       <div
-        className="relative h-screen bg-cover bg-center"
+        className="relative h-[70vh] bg-cover bg-center flex items-center justify-center text-center text-white"
         style={{ backgroundImage: `url(${assets.contact_bg})` }}
       >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gray-900 bg-opacity-60"></div>
-
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-          <h2 className="text-4xl font-bold mb-4 animate-fadeIn">Contact Us</h2>
-          <p className="text-lg mb-6 max-w-2xl">
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative z-10 px-4">
+          <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
+          <p className="text-lg max-w-xl mx-auto">
             Need clarification? We're here to help, 24/7. Reach out to us anytime.
           </p>
-          <button className="bg-primary hover:bg-hardYellow text-secondary py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+          <button className="mt-6 bg-primary hover:bg-hardYellow text-secondary py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
             Help Line
           </button>
         </div>
       </div>
 
       {/* Contact Section */}
-      <div className="flex flex-col lg:flex-row px-4 py-12 sm:px-6 lg:px-12 max-w-7xl gap-12">
+      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Contact Details */}
-        <div className="lg:w-7/12 space-y-8">
-          <h2 className="text-3xl font-bold text-gray-800">Get In Touch</h2>
+        <div className="space-y-8 ">
+          <h2 className="text-4xl font-bold text-primary">Get In Touch</h2>
           <p className="text-gray-700">
             Stay connected with us on all our social media platforms or reach out directly.
           </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-24 text-sm">
-            {/* Contact Items */}
+          <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
             {[
               {
                 icon: assets.Phone_icon,
-                title: "Phone",
-                info: "+44 7391 530988",
-              },
-              {
-                icon: assets.location_icon,
-                title: "Address",
-                info: `38 Fox Street, Rothwell,
-Kettering, Northamptonshire, England, United Kingdom`,
+                title: 'Phone',
+                info: '+44 7391 530988',
               },
               {
                 icon: assets.mail,
-                title: "Email",
-                info: "info@laurissportmassagetherapy.com",
+                title: 'Email',
+                info: 'info@laurissportmassagetherapy.com',
               },
               {
                 icon: assets.clock,
-                title: "Operation Hours",
-                info: `Monday - Friday: 9:00 AM - 7:00 PM
-Saturday: 10:00 AM - 4:00 PM
-Sunday: Closed`,
+                title: 'Operation Hours',
+                info: `Monday - Friday: 9:00 AM - 7:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed`,
               },
             ].map((item, index) => (
               <div
                 key={index}
-                className="flex items-start space-x-4 lg:items-center lg:space-x-6 "
+                className="flex items-start gap-4 w-[350px] bg-white p-4 rounded-lg shadow-md"
               >
-                <img
-                  src={item.icon}
-                  alt={`${item.title} Icon`}
-                  className="w-5 h-5 flex-shrink-0"
-                />
+                <img src={item.icon} alt={item.title} className="w-10 h-10" />
                 <div>
-                  <p className="text-sm font-semibold mb-1">{item.title}</p>
-                  <p className="text-gray-600 whitespace-pre-line">{item.info}</p>
+                  <p className="text-lg font-semibold">{item.title}</p>
+                  <p className="text-gray-600 text-[14px] whitespace-pre-line">{item.info}</p>
                 </div>
               </div>
             ))}
@@ -126,10 +109,10 @@ Sunday: Closed`,
         </div>
 
         {/* Contact Form */}
-        <div className="lg:w-5/12 bg-white p-8 rounded-lg shadow-md">
-          <h2 className="text-2xl font-bold mb-6 text-center">Send Us a Message</h2>
+        <div className="bg-white p-8 rounded-lg shadow-lg">
+          <h2 className="text-3xl font-bold mb-6 text-center text-primary">Send Us a Message</h2>
           <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-            <div className="flex flex-col sm:flex-row gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <input
                 type="text"
                 id="firstName"
@@ -180,20 +163,15 @@ Sunday: Closed`,
               className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-hardGreen h-32"
               required
             ></textarea>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="bg-primary hover:bg-hardYellow text-secondary py-3 px-8 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-              >
-                Send Message
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="w-full bg-primary hover:bg-hardYellow text-secondary py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            >
+              Send Message
+            </button>
           </form>
         </div>
       </div>
-
-      {/* Map Section */}
-     <div className='mb-10' ><iframe width="100%" height="400" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=38%20Fox%20Street,%20Rothwell,%20Kettering,%20Northamptonshire,%20England,%20United%20Kingdom+(Lauris%20Sport%20Massage%20therapy%20center)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps vehicle tracker</a></iframe></div>
     </div>
   );
 };

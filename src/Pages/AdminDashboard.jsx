@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../firebase'; // Ensure this is the correct path
+import { db,auth } from '../firebase'; // Ensure this is the correct path
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { useAppointments } from '../Context/AppointmentContext';
 import Schedule from './Schedule';
@@ -79,11 +79,17 @@ const AdminDashboard = () => {
       console.error('Error confirming appointment:', error);
     }
   };
+  const handleLogout = async () => {
+    await signOut(auth); // Log the user out from Firebase
+    setUser(null); // Clear user state
+    setUserRole(null); // Clear userRole state
+    navigate('/login'); // Redirect to login page
+  };
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-green-100">
       {/* Sidebar */}
-      <div className="w-full lg:w-44 bg-secondary text-white p-6">
+      <div className="w-full lg:w-44 bg-primary text-white p-6">
         <h2 className="text-xl font-bold mb-6">Admin Dashboard</h2>
         <ul>
           <li className="mb-4">
@@ -102,8 +108,8 @@ const AdminDashboard = () => {
             </a>
           </li>
           <li className="mb-4">
-            <a href="/settings" className="block py-2 px-4 rounded hover:bg-gray-700">
-              Settings
+            <a onClick={handleLogout} className="block py-2 px-4 rounded bg-red-600 hover:bg-gray-700">
+              Logout
             </a>
           </li>
         </ul>
@@ -112,7 +118,7 @@ const AdminDashboard = () => {
       {/* Main Content */}
       <div className="flex-1 p-4 lg:p-4">
         <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-semibold text-gray-800">Appointments</h1>
+          <h1 className=" text-lg md:text-2xl font-semibold text-gray-800">Appointments</h1>
           <button
             onClick={handleAddAppointmentClick}
             className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:ring focus:ring-blue-300"
