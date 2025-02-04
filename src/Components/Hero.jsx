@@ -55,7 +55,7 @@ const Hero = () => {
           className="text-3xl md:text-5xl font-bold text-primary"
           variants={textVariants}
         >
-          Lauris Sport Massage Therapy
+          Lauraphys Wellness LTD
         </motion.h2>
         <motion.h4
           className="text-xl md:text-2xl font-semibold text-secondary mt-4"

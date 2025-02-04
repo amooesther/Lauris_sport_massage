@@ -8,12 +8,13 @@ const AboutUs = () => {
         {/* Text Content */}
         <div className="flex flex-col items-start md:w-1/2 text-center md:text-left">
         <h2 className="text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary mb-4">
-   Lauris Sport Massage Therapy Center
+   Lauraphys Wellness LTD
 </h2>
           
-          <p className="text-lg md:text-xl leading-relaxed mb-4">
-            Your trusted partner in wellness and recovery, nestled in the heart of Fox Street, Rothwell, Kettering, Northamptonshire, England.
-          </p>
+<p className="text-lg md:text-xl leading-relaxed mb-4">
+  Empowering Your Journey to Wellness—Experience Care, Compassion, and Recovery at Lauraphys Wellness LTD, Linden Building A, 8-9 Regent Park, Booth Drive, Wellingborough NN8 6GR.
+</p>
+
           
           {/* Book Now Button */}
           <button className="bg-primary text-white py-3 px-8 rounded-lg font-semibold text-lg hover:scale-105 transform transition-all duration-300">
@@ -68,9 +69,10 @@ const AboutUs = () => {
           <div className="rounded-tl-[70px] rounded-br-[70px] bg-white p-6 text-center shadow-lg">
             <img src={assets.location_icon} alt="Location Icon" className="mx-auto mb-4" />
             <p className="font-semibold text-lg">Location</p>
-            <p className="text-gray-700">
-              38 Fox Street, Rothwell, Kettering, Northamptonshire, England, United Kingdom
-            </p>
+            <p className="text-center ">
+                Linden Building A, 8-9 Regent Park, 
+                Booth Drive, Wellingborough NN8 6GR
+              </p>
           </div>
 
           <div className="rounded-tl-[70px] rounded-br-[70px] bg-white p-6 text-center shadow-lg">

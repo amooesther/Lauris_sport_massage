@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { db,auth } from '../firebase'; // Ensure this is the correct path
+import { db,auth } from '../firebase'; 
 import { collection, getDocs, doc, deleteDoc, updateDoc } from 'firebase/firestore';
 import { useAppointments } from '../Context/AppointmentContext';
 import Schedule from './Schedule';

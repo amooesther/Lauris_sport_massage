@@ -41,9 +41,9 @@ const Footer = () => {
             <div className="flex items-start justify-center md:justify-start gap-4">
               <FaMapMarkerAlt className="w-5 h-5 text-white" />
               <p className="text-center md:text-left">
-                Fox Street, Rothwell, <br />
-                Kettering, Northamptonshire, <br />
-                England, United Kingdom
+                Lauraphys Wellness LTD, <br />
+                Linden Building A, 8-9 Regent Park, <br />
+                Booth Drive, Wellingborough NN8 6GR
               </p>
             </div>
           </div>
