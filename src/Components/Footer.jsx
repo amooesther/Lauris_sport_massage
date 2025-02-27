@@ -42,8 +42,8 @@ const Footer = () => {
               <FaMapMarkerAlt className="w-5 h-5 text-white" />
               <p className="text-center md:text-left">
                 Lauraphys Wellness LTD, <br />
-                Linden Building A, 8-9 Regent Park, <br />
-                Booth Drive, Wellingborough NN8 6GR
+                Unit 4 office 3 Booth Drive, <br />
+                Farm industrial estate, Wellingborough NN8 6GR
               </p>
             </div>
           </div>

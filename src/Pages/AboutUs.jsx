@@ -12,7 +12,7 @@ const AboutUs = () => {
 </h2>
           
 <p className="text-lg md:text-xl leading-relaxed mb-4">
-  Empowering Your Journey to Wellness—Experience Care, Compassion, and Recovery at Lauraphys Wellness LTD, Linden Building A, 8-9 Regent Park, Booth Drive, Wellingborough NN8 6GR.
+  Empowering Your Journey to Wellness—Experience Care, Compassion, and Recovery at Lauraphys Wellness LTD, Unit 4 office 3 , Booth Drive , Park Farm industrial estate Wellingborough NN8 6GR.
 </p>
 
           
@@ -70,8 +70,8 @@ const AboutUs = () => {
             <img src={assets.location_icon} alt="Location Icon" className="mx-auto mb-4" />
             <p className="font-semibold text-lg">Location</p>
             <p className="text-center ">
-                Linden Building A, 8-9 Regent Park, 
-                Booth Drive, Wellingborough NN8 6GR
+                Unit 4 office3 booth drive, Park 
+             farm industrial estate, Wellingborough NN8 6GR
               </p>
           </div>
 
