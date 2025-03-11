@@ -67,7 +67,7 @@ const Hero = () => {
           className="text-base md:text-lg mt-4 leading-relaxed"
           variants={textVariants}
         >
-         <p>Revitalize your body and mind with expert sports massage therapy. Whether you're an athlete or seeking relief from everyday tension, Lauris Sport Massage Therapy Center is here to keep you moving at your best.</p>
+         <p>Revitalize your body and mind with expert sports massage therapy. Whether you're an athlete or seeking relief from everyday tension, Lauraphys Wellness center is here to keep you moving at your best.</p>
 
         </motion.p>
         <motion.div variants={textVariants}>
