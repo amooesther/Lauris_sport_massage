@@ -16,7 +16,7 @@ const Service = () => {
           {
             title: 'Deep Tissue Massage',
             imgSrc: assets.deep_tissue,
-            description: 'At Lauris Sport Massage Therapy, our Deep Tissue Massage helps relieve chronic tension, reduce pain, and restore your body’s natural balance.',
+            description: 'At Lauraphys wellness LTD, our Deep Tissue Massage helps relieve chronic tension, reduce pain, and restore your body’s natural balance.',
             altText: 'Deep Tissue Massage',
           },
           {

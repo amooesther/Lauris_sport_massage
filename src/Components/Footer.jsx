@@ -9,9 +9,9 @@ const Footer = () => {
         
         {/* About Us Section */}
         <div className="space-y-6 text-center md:text-left">
-          <img src={assets.logo} alt="Lauris Sport Massage Therapy Logo" className="w-24 h-24 mx-auto md:mx-0" />
+          <img src={assets.logo} alt="Lauraphys Logo" className="w-24 h-24 mx-auto md:mx-0" />
           <p className="text-lg text-gray-200">
-            Lauris Sport Massage Therapy offers tailored treatments to help you recover, relax, and stay active. Our experienced therapists are dedicated to your well-being.
+            Lauraphys Wellness LTD  offers tailored treatments to help you recover, relax, and stay active. Our experienced therapists are dedicated to your well-being.
           </p>
         </div>
 
@@ -32,8 +32,8 @@ const Footer = () => {
             <div className="flex items-center justify-center md:justify-start gap-4">
               <FaEnvelope className="w-5 h-5 text-white" />
               <p>
-                <a href="mailto:info@laurismassagetherapy.com" className="hover:text-gray-200 transition-colors text-[14px]">
-                  info@laurissportmassagetherapy.com
+                <a href="mailto:info@lauraphys.com" className="hover:text-gray-200 transition-colors text-[14px]">
+                  info@lauraphys.com
                 </a>
               </p>
             </div>
@@ -54,7 +54,7 @@ const Footer = () => {
           <h3 className="text-xl font-semibold">Follow Us</h3>
           <div className="flex justify-center gap-6">
             {/* Social Media Icons */}
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200">
+            <a href="https://facebook.com/profile.php?id=61573706634976" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200">
               <FaFacebookF className="w-6 h-6" />
             </a>
             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-200">

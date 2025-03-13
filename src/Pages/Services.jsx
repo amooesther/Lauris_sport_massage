@@ -41,7 +41,7 @@ const Services = () => {
       title: "Deep Tissue Massage",
       img: assets.deep_tissue,
       description:
-        "At Lauris Sport Massage Therapy, our Deep Tissue Massage is designed to target and realign the deeper layers of muscles and connective tissue. This specialized treatment helps relieve chronic tension, reduce pain, and restore your body’s natural balance.",
+        "At Lauraphys wellness LTD, our Deep Tissue Massage is designed to target and realign the deeper layers of muscles and connective tissue. This specialized treatment helps relieve chronic tension, reduce pain, and restore your body’s natural balance.",
     },
     {
       title: "Injury Rehabilitation",

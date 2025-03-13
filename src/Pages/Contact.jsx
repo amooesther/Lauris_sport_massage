@@ -86,7 +86,7 @@ const ContactUs = () => {
               {
                 icon: assets.mail,
                 title: 'Email',
-                info: 'info@laurissportmassagetherapy.com',
+                info: 'info@lauraphys.com.com',
               },
               {
                 icon: assets.clock,

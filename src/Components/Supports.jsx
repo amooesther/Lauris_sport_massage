@@ -34,7 +34,7 @@ const Supports = () => {
       >
         <img
           src={assets.landing_page}
-          alt="Welcome to Lauris Sport Massage Therapy Center"
+          alt="Welcome to Lauraphys Wellness LTD"
           className="w-full max-w-md mx-auto rounded-lg shadow-lg rounded-tl-[50px]  rounded-br-[50px]"
         />
       </motion.div>
@@ -48,7 +48,7 @@ const Supports = () => {
         variants={textVariants}
       >
         <h3 className="text-2xl md:text-4xl font-bold text-primary mb-4">
-          Welcome to Lauris Sport Massage Therapy Center
+          Welcome to Lauraphys wellness center
         </h3>
         <p className="text-base md:text-lg leading-relaxed mb-4">
           As experienced and certified Sports Massage Therapists, we are

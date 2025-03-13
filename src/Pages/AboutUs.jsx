@@ -26,7 +26,7 @@ const AboutUs = () => {
         <div className="md:w-1/2 flex justify-center">
           <img
             src={assets.about}
-            alt="About Lauris Sport Massage Therapy"
+            alt="About Lauraphys wellness LTD"
             className="w-full rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105"
           />
         </div>
@@ -40,7 +40,7 @@ const AboutUs = () => {
     <div className="text-center md:text-left md:w-full lg:w-1/2 shadow-xl bg-green-50 rounded-tl-[100px] rounded-br-[100px] p-8">
       <h3 className="text-2xl font-semibold text-primary mb-4">Our Mission</h3>
       <p className="text-lg md:text-xl leading-relaxed text-gray-700 mb-6">
-        At Lauris Sport Massage Therapy Center, our mission is to enhance your well-being by providing tailored sports massage therapies that promote recovery, relieve pain, and restore vitality, empowering you to live an active, pain-free life.
+        At Lauraphts Wellness LTD, our mission is to enhance your well-being by providing tailored sports massage therapies that promote recovery, relieve pain, and restore vitality, empowering you to live an active, pain-free life.
       </p>
     </div>
 
@@ -78,16 +78,16 @@ const AboutUs = () => {
           <div className="rounded-tl-[70px] rounded-br-[70px] bg-white p-6 text-center shadow-lg">
             <img src={assets.mail} alt="Email Icon" className="mx-auto mb-4" />
             <p className="font-semibold text-lg">Email</p>
-            <p className="text-gray-700 ">info@laurissportmassagetherapy.com</p>
+            <p className="text-gray-700 ">info@lauraphys.com</p>
           </div>
 
           <div className="rounded-tl-[70px] rounded-br-[70px] bg-white p-6 text-center shadow-lg">
             <img src={assets.clock} alt="Clock Icon" className="mx-auto mb-4" />
             <p className="font-semibold text-lg">Operation Hours</p>
             <p className="text-gray-700">
-              Monday - Friday: 9:00 AM - 7:00 PM
+              Monday - Friday: 9:00 AM - 5:00 PM
               <br />
-              Saturday: 10:00 AM - 4:00 PM
+              Saturday: 10:00 AM - 5:00 PM
               <br />
               Sunday: Closed
             </p>
