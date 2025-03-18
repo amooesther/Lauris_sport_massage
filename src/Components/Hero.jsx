@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 
+
 const Hero = () => {
   // Animation variants
   const containerVariants = {
@@ -91,7 +92,7 @@ const Hero = () => {
         <motion.img
           src={assets.hero_img}
           alt="Sports Massage Therapy"
-          className="max-w-full h-auto rounded-lg shadow-2xl"
+          className="max-w-full h-auto rounded-full shadow-2xl"
           variants={imageVariants}
         />
       </motion.div>

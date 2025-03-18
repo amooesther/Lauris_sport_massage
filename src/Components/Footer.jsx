@@ -9,7 +9,7 @@ const Footer = () => {
         
         {/* About Us Section */}
         <div className="space-y-6 text-center md:text-left">
-          <img src={assets.logo} alt="Lauraphys Logo" className="w-24 h-24 mx-auto md:mx-0" />
+          <img src={assets.logo} alt="Lauraphys Logo" className="w-30 h-24 mx-auto md:mx-0" />
           <p className="text-lg text-gray-200">
             Lauraphys Wellness LTD  offers tailored treatments to help you recover, relax, and stay active. Our experienced therapists are dedicated to your well-being.
           </p>
@@ -69,7 +69,7 @@ const Footer = () => {
 
       {/* Footer Bottom Section */}
       <div className="mt-12 border-t border-gray-500 pt-4 text-center text-sm">
-        <p>&copy; {new Date().getFullYear()} Lauris Sport Massage Therapy. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Lauraphys Wellness LTD. All rights reserved.</p>
       </div>
     </div>
   );
