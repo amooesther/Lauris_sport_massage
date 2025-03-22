@@ -1,176 +1,167 @@
-import React, { useState, useEffect } from 'react';
-import { db, collection, addDoc, auth } from '../firebase'; // Firebase imports
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Firebase auth state
-import { useNavigate } from 'react-router-dom';
-import { useAppointments } from '../Context/AppointmentContext';
+import React, { useState, useEffect } from "react";
+import { db, collection, addDoc } from "../firebase";
+import { useAppointments } from "../Context/AppointmentContext";
 
 const Schedule = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true); // To handle auth loading state
-
   const { addAppointment } = useAppointments();
-  const navigate = useNavigate();
+  const [enteredName, setEnteredName] = useState(""); // User Name
+  const [phone, setPhone] = useState(""); // Phone Number
+  const [email, setEmail] = useState(""); // Email Address
+  const [selectedDate, setSelectedDate] = useState(""); // Appointment Date
+  const [selectedTime, setSelectedTime] = useState(""); // Appointment Time
+  const [loading, setLoading] = useState(false); // Loading State
+  const [message, setMessage] = useState(""); // Success Message
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal State
 
-  // Track authentication state using Firebase's onAuthStateChanged
+  // Auto-save appointment when both date and time are selected
   useEffect(() => {
-    const firebaseAuth = getAuth();
-    const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
-      setUser(currentUser); // Update user state
-      setAuthLoading(false); // Auth state loaded
-    });
-
-    return unsubscribe; // Cleanup listener on unmount
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (authLoading) return; // Prevent action while auth state is loading
-
-    if (!user) {
-      alert('You must be logged in to book an appointment');
-      navigate('/login');
-      return;
+    if (enteredName && phone && email && selectedDate && selectedTime) {
+      saveAppointment();
     }
+  }, [selectedDate, selectedTime]);
 
+  // Save to Firestore
+  const saveAppointment = async () => {
+    if (loading) return; // Prevent multiple saves
     setLoading(true);
+    setMessage("");
+
+    const appointment = {
+      name: enteredName,
+      phone,
+      email,
+      date: selectedDate,
+      time: selectedTime,
+      createdAt: new Date().toISOString(),
+      status: "Confirmed",
+    };
 
     try {
-      const appointment = {
-        name,
-        email,
-        phone,
-        date,
-        time,
-        userId: user.uid, // Associate appointment with logged-in user
-        createdAt: new Date().toISOString(),
-        status: 'Pending', // Default status
-      };
-
-      await addDoc(collection(db, 'appointments'), appointment);
-
+      await addDoc(collection(db, "appointments"), appointment);
       addAppointment?.(appointment);
-
-      setName('');
-      setEmail('');
-      setPhone('');
-      setDate('');
-      setTime('');
-
-      alert('Your appointment has been successfully booked. Thank you for choosing Lauris Sport Massage Therapy!');
+     
     } catch (error) {
-      console.error('Failed to book appointment:', error);
-      alert('Failed to book appointment. Please try again.');
+      console.error("Error saving appointment:", error);
+
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-50 mb-5 px-4 py-8">
-      <div className="bg-white shadow-xl rounded-lg p-6 md:p-10 w-full max-w-lg">
+    <div className="flex items-center justify-center min-h-screen bg-blue-50 px-4 py-8">
+      <div className="bg-white shadow-xl rounded-lg p-6 md:p-10 w-full max-w-2xl">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Book Your Appointment
         </h2>
         <p className="text-center text-gray-600 mb-6">
-          Or call us on <span className="font-bold text-indigo-600">+44 7391 530988</span>
+          Or call us at <span className="font-bold text-indigo-600">+44 7391 530988</span>
         </p>
 
-        {authLoading ? (
-          <p>Loading...</p>
-        ) : user ? (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="name">
-                Full Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="email">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="phone">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="date">
-                Appointment Date
-              </label>
-              <input
-                type="date"
-                id="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1" htmlFor="time">
-                Appointment Time
-              </label>
-              <input
-                type="time"
-                id="time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-indigo-700 transition-all duration-300"
-              disabled={loading}
-            >
-              {loading ? 'Booking...' : 'Book Appointment'}
-            </button>
-          </form>
-        ) : (
-          <div className="text-center">
-            <p className="text-red-500 mb-4">You must be logged in to book an appointment.</p>
-            <button
-              onClick={() => navigate('/login')}
-              className="py-2 px-4 bg-indigo-600 text-white font-bold rounded hover:bg-indigo-700 transition-all duration-300"
-            >
-              Sign In
-            </button>
-          </div>
-        )}
+        {/* Name Input */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
+          <input
+            type="text"
+            value={enteredName}
+            onChange={(e) => setEnteredName(e.target.value)}
+            placeholder="Enter your full name"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        {/* Phone Number Input */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="Enter your phone number"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        {/* Email Input */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        {/* Date Input */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Select Date</label>
+          <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        {/* Time Input */}
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700 mb-1">Select Time</label>
+          <input
+            type="time"
+            value={selectedTime}
+            onChange={(e) => setSelectedTime(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+            required
+          />
+        </div>
+
+        {/* Success Message */}
+        {message && <p className="text-center text-green-600 font-medium">{message}</p>}
+
+        {/* Setmore Booking Button */}
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="bg-indigo-600 text-white px-5 py-2 rounded-lg font-medium shadow-md hover:bg-indigo-700 transition"
+          >
+            Book Appointment
+          </button>
+        </div>
       </div>
+
+      {/* Modal for Setmore Iframe */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-5 rounded-lg shadow-lg w-11/12 md:w-3/4 lg:w-1/2">
+            <div className="flex justify-between items-center mb-3">
+              <h3 className="text-xl font-semibold">Book Your Appointment</h3>
+              <button onClick={() => setIsModalOpen(false)} className="text-gray-500 hover:text-gray-700 text-xl">&times;</button>
+            </div>
+            
+            {/* Setmore Iframe */}
+            <iframe
+              src="https://estherqu7f.setmore.com/services/524e2775-3af2-42e3-9242-585719eb828e"
+              className="w-full h-[500px] border-none"
+            ></iframe>
+
+            {/* Close Button */}
+            <div className="text-center mt-4">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
