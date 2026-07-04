@@ -1,142 +1,147 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useUser } from "../Context/UserContext"; // Import useUser
-import { signOut } from "firebase/auth";
-import { auth } from "../firebase";
-import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 
 const Navbar = () => {
-  const { user, userRole, setUser, setUserRole } = useUser(); // Get user and userRole from context
-  const navigate = useNavigate(); // For redirecting
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State to track menu visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const handleLogout = async () => {
-    await signOut(auth); // Log the user out from Firebase
-    setUser(null); // Clear user state
-    setUserRole(null); // Clear userRole state
-    navigate("/login"); // Redirect to login page
-  };
+  // Monitor scroll to trigger sticky background change
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen); // Toggle the menu state
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
-    if (window.innerWidth < 768) setIsMenuOpen(false); // Close the menu only on mobile
+    setIsMenuOpen(false);
   };
 
   return (
-    <div className="flex items-center justify-between py-4 mb-5 border-b relative">
-      {/* Logo */}
-      <Link to="/" onClick={closeMenu}>
-        <img className="cursor-pointer w-35 h-20" src={assets.logo} alt="Logo" />
-      </Link>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white/90 backdrop-blur-md shadow-premium py-2 border-b border-gray-100"
+          : "bg-transparent py-4"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
+          <img
+            className="w-auto h-12 md:h-16 transition-transform duration-300 hover:scale-102"
+            src={assets.logo}
+            alt="LauraPhys Logo"
+          />
+        </Link>
 
-      {/* Hamburger Menu Button */}
-      <button
-        className="block md:hidden text-2xl focus:outline-none"
-        onClick={toggleMenu}
-      >
-        {isMenuOpen ? "✖" : "☰"} {/* Change icon based on menu state */}
-      </button>
+        {/* Desktop Navigation Links */}
+        <nav className="hidden md:flex items-center gap-8">
+          <ul className="flex items-center gap-8 font-medium text-[15px] tracking-wide">
+            {[
+              { to: "/", label: "Home" },
+              { to: "/about", label: "About Us" },
+              { to: "/services", label: "Services" },
+              { to: "/contact", label: "Contact" },
+            ].map((link) => (
+              <li key={link.to}>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `relative py-2 text-navy-dark transition-colors duration-300 hover:text-secondary ${
+                      isActive ? "text-secondary font-semibold" : ""
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {link.label}
+                      {isActive && (
+                        <span className="absolute bottom-0 left-0 w-full h-[2px] bg-secondary rounded-full" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
-      {/* Navigation Links */}
-      <ul
-        className={`absolute top-full left-0 w-full bg-white text-black shadow-lg flex flex-col items-center gap-5 font-medium transition-transform duration-300 md:static md:flex-row md:bg-transparent md:shadow-none md:flex md:justify-center ${
-          isMenuOpen ? "translate-y-0" : "-translate-y-[200%]"
-        } md:translate-y-0`}
-      >
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "text-secondary hover:text-primary transition-all duration-300"
-              : "hover:text-secondary transition-all duration-300"
-          }
-          onClick={closeMenu}
-        >
-          <li>Home</li>
-        </NavLink>
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            isActive
-              ? "text-secondary hover:text-primary transition-all duration-300"
-              : "hover:text-secondary transition-all duration-300"
-          }
-          onClick={closeMenu}
-        >
-          <li>About</li>
-        </NavLink>
-        <NavLink
-          to="/services"
-          className={({ isActive }) =>
-            isActive
-              ? "text-secondary hover:text-primary transition-all duration-300"
-              : "hover:text-secondary transition-all duration-300"
-          }
-          onClick={closeMenu}
-        >
-          <li>Services</li>
-        </NavLink>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            isActive
-              ? "text-secondary hover:text-primary transition-all duration-300"
-              : "hover:text-secondary transition-all duration-300"
-          }
-          onClick={closeMenu}
-        >
-          <li>Contact</li>
-        </NavLink>
-        <NavLink
-          to="/my-appointment"
-          className={({ isActive }) =>
-            isActive
-              ? "text-secondary hover:text-primary transition-all duration-300"
-              : "hover:text-secondary transition-all duration-300"
-          }
-          onClick={closeMenu}
-        >
-          <li>My Appointments</li>
-        </NavLink>
-
-        {/* Admin Button - only visible if the user is an admin */}
-        {userRole === "admin" && (
-          <NavLink
-            to="/admin"
-            className={({ isActive }) =>
-              isActive
-                ? "text-secondary hover:text-primary transition-all duration-300"
-                : "hover:text-secondary transition-all duration-300"
-            }
-            onClick={closeMenu}
-          >
-            <li>Admin</li>
-          </NavLink>
-        )}
-
-        {/* Conditional Sign In / Log Out Button */}
-        <li>
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-500 w-28 text-white px-4 py-2 rounded-md md:block"
-            >
-              Log Out
+        {/* Action Buttons (Desktop) */}
+        <div className="hidden md:flex items-center gap-4">
+          <Link to="/book">
+            <button className="bg-accent-gold hover:bg-amber-600 text-white font-bold py-2.5 px-5 rounded-lg shadow-teal-glow hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 text-sm">
+              Book Appointment
             </button>
-          ) : (
-            <Link to="/login">
-              <button className="bg-primary w-28 border-none outline-0 hover:bg-secondary text-white px-4 py-2 rounded-md md:block">
-                Sign In
-              </button>
-            </Link>
-          )}
-        </li>
-      </ul>
-    </div>
+          </Link>
+        </div>
+
+        {/* Mobile Hamburger Button */}
+        <div className="flex items-center gap-4 md:hidden">
+          <Link to="/book">
+            <button className="bg-accent-gold text-white font-bold py-1.5 px-3.5 rounded-md text-xs shadow-md">
+              Book Now
+            </button>
+          </Link>
+          <button
+            className="text-navy-dark focus:outline-none text-2xl"
+            onClick={toggleMenu}
+            aria-label="Toggle navigation menu"
+          >
+            {isMenuOpen ? "✕" : "☰"}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Drawer Navigation */}
+      <div
+        className={`fixed inset-0 top-[60px] md:top-[80px] bg-white z-40 flex flex-col justify-between border-t border-gray-100 transition-all duration-300 transform ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="px-6 py-8 flex flex-col gap-6 overflow-y-auto">
+          <nav className="flex flex-col gap-5 text-lg font-semibold text-navy-dark">
+            {[
+              { to: "/", label: "Home" },
+              { to: "/about", label: "About Us" },
+              { to: "/services", label: "Services" },
+              { to: "/contact", label: "Contact" },
+            ].map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                onClick={closeMenu}
+                className={({ isActive }) =>
+                  `py-2 transition-colors duration-300 ${
+                    isActive ? "text-secondary pl-2 border-l-4 border-secondary" : "hover:text-secondary"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+
+        <div className="p-6 bg-gray-50 border-t border-gray-100">
+          <Link to="/book" onClick={closeMenu}>
+            <button className="w-full bg-accent-gold hover:bg-amber-600 text-white font-bold py-3 rounded-lg transition duration-300 text-center">
+              Book Appointment
+            </button>
+          </Link>
+        </div>
+      </div>
+    </header>
   );
 };
 

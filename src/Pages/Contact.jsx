@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { assets } from '../assets/assets';
+import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ const ContactUs = () => {
     subject: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useRef();
 
@@ -23,17 +26,18 @@ const ContactUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     emailjs
       .sendForm(
-        'service_c2117lt', // Replace with your EmailJS Service ID
-        'template_atpdnyi', // Replace with your EmailJS Template ID
+        'service_c2117lt', // Preserved Service ID
+        'template_atpdnyi', // Preserved Template ID
         form.current,
-        'fJjis2aAbJDSXIylL' // Replace with your EmailJS Public Key
+        'fJjis2aAbJDSXIylL' // Preserved Public Key
       )
       .then(
         () => {
-          alert('Message sent successfully!');
+          toast.success('Message sent successfully!');
           setFormData({
             firstName: '',
             lastName: '',
@@ -41,137 +45,197 @@ const ContactUs = () => {
             subject: '',
             message: '',
           });
+          setIsSubmitting(false);
         },
         (error) => {
           console.error('FAILED...', error.text);
-          alert('Failed to send the message. Please try again.');
+          toast.error('Failed to send the message. Please try again.');
+          setIsSubmitting(false);
         }
       );
   };
 
   return (
-    <div className="bg-gray-100">
-      {/* Hero Section */}
-      <div
-        className="relative h-[70vh] bg-cover bg-center flex items-center justify-center text-center text-white"
-        style={{ backgroundImage: `url(${assets.contact_bg})` }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative z-10 px-4">
-          <h1 className="text-5xl font-bold mb-4">Contact Us</h1>
-          <p className="text-lg max-w-xl mx-auto">
-            Need clarification? We're here to help, 24/7. Reach out to us anytime.
+    <div className="bg-soft-neutral min-h-screen">
+      
+      {/* Page Hero */}
+      <section className="relative bg-navy-dark text-white py-16 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-25 select-none pointer-events-none"
+          style={{ backgroundImage: `url(${assets.contact_bg})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy-dark/95 to-transparent" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-3">
+          <span className="text-secondary font-bold text-sm uppercase tracking-wider">Get in Touch</span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">Contact Us</h1>
+          <p className="text-gray-300 text-lg max-w-xl">
+            Need clarification about our treatments or booking slots? We are here to support you.
           </p>
-          <button className="mt-6 bg-primary hover:bg-hardYellow text-secondary py-3 px-6 rounded-lg shadow-lg transition-transform transform hover:scale-105">
-            Help Line
-          </button>
         </div>
-      </div>
+      </section>
 
-      {/* Contact Section */}
-      <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Contact Details */}
-        <div className="space-y-8 ">
-          <h2 className="text-4xl font-bold text-primary">Get In Touch</h2>
-          <p className="text-gray-700">
-            Stay connected with us on all our social media platforms or reach out directly.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-1 gap-8">
-            {[
-              {
-                icon: assets.Phone_icon,
-                title: 'Phone',
-                info: '+44 7391 530988',
-              },
-              {
-                icon: assets.mail,
-                title: 'Email',
-                info: 'info@lauraphys.com.com',
-              },
-              {
-                icon: assets.clock,
-                title: 'Operation Hours',
-                info: `Monday - Friday: 9:00 AM - 7:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed`,
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="flex items-start gap-4 w-[350px] bg-white p-4 rounded-lg shadow-md"
-              >
-                <img src={item.icon} alt={item.title} className="w-10 h-10" />
-                <div>
-                  <p className="text-lg font-semibold">{item.title}</p>
-                  <p className="text-gray-600 text-[14px] whitespace-pre-line">{item.info}</p>
+      {/* Main Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative overflow-hidden">
+        {/* Background glow blobs */}
+        <div className="absolute top-12 left-12 w-96 h-96 bg-secondary/5 rounded-full blur-3xl pointer-events-none -z-10" />
+        <div className="absolute bottom-12 right-12 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 relative z-10">
+          
+          {/* Column 1: Details & Operating Info */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <h2 className="text-3xl font-extrabold text-navy-dark">Connect With Our Specialists</h2>
+              <p className="text-slate-neutral leading-relaxed">
+                We are located in Wellingborough. Feel free to call us, send an email, or complete the form. If you're ready to make a booking, use our scheduler to lock in a slot.
+              </p>
+            </div>
+
+            {/* Structured details cards */}
+            <div className="space-y-4 max-w-md">
+              {[
+                {
+                  icon: <FaPhoneAlt className="text-secondary w-5 h-5" />,
+                  title: "Phone & WhatsApp Support",
+                  info: "+44 7391 530988",
+                  sub: "Mon - Sat (Hours apply). Feel free to message on WhatsApp."
+                },
+                {
+                  icon: <FaEnvelope className="text-secondary w-5 h-5" />,
+                  title: "Email Support",
+                  info: "info@lauraphys.com",
+                  sub: "For general, corporate or event enquiries."
+                },
+                {
+                  icon: <FaClock className="text-secondary w-5 h-5" />,
+                  title: "Operation Hours",
+                  info: "Mon - Fri: 9:00 AM - 7:00 PM\nSaturday: 10:00 AM - 4:00 PM\nSunday: Closed",
+                  sub: "By appointment only."
+                }
+              ].map((item, idx) => (
+                <div key={idx} className="glass-morphic flex gap-4 p-5 rounded-2xl">
+                  <div className="p-3 bg-teal-50 rounded-xl shrink-0 h-fit">
+                    {item.icon}
+                  </div>
+                  <div className="space-y-1">
+                    <h3 className="font-bold text-navy-dark text-base">{item.title}</h3>
+                    <p className="text-sm font-semibold text-secondary whitespace-pre-line leading-relaxed">{item.info}</p>
+                    <p className="text-xs text-slate-neutral">{item.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2: Contact Form */}
+          <div className="glass-morphic p-8 rounded-2xl space-y-6">
+            <div className="space-y-2">
+              <h2 className="text-2xl font-bold text-navy-dark">Send Us a Message</h2>
+              <p className="text-xs text-slate-neutral">We typically reply within 2 hours during clinic operation schedules.</p>
+            </div>
+
+            <form ref={form} onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label htmlFor="firstName" className="text-xs font-bold text-navy-dark">First Name</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    name="user_firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    className="w-full border border-gray-250 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 text-sm"
+                    required
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label htmlFor="lastName" className="text-xs font-bold text-navy-dark">Last Name</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    name="user_lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    className="w-full border border-gray-250 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 text-sm"
+                    required
+                  />
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Contact Form */}
-        <div className="bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-3xl font-bold mb-6 text-center text-primary">Send Us a Message</h2>
-          <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <input
-                type="text"
-                id="firstName"
-                name="user_firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-hardGreen"
-                required
-              />
-              <input
-                type="text"
-                id="lastName"
-                name="user_lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-hardGreen"
-                required
-              />
-            </div>
-            <input
-              type="email"
-              id="email"
-              name="user_email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-hardGreen"
-              required
-            />
-            <input
-              type="text"
-              id="subject"
-              name="user_subject"
-              placeholder="Subject"
-              value={formData.subject}
-              onChange={handleChange}
-              className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-hardGreen"
-              required
-            />
-            <textarea
-              id="message"
-              name="user_message"
-              placeholder="Message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full border border-gray-300 px-4 py-3 rounded-md focus:outline-none focus:ring-2 focus:ring-hardGreen h-32"
-              required
-            ></textarea>
-            <button
-              type="submit"
-              className="w-full bg-primary hover:bg-hardYellow text-secondary py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105"
-            >
-              Send Message
-            </button>
-          </form>
+              <div className="space-y-1">
+                <label htmlFor="email" className="text-xs font-bold text-navy-dark">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="user_email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="w-full border border-gray-250 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 text-sm"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label htmlFor="subject" className="text-xs font-bold text-navy-dark">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="user_subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="w-full border border-gray-250 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 text-sm"
+                  required
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label htmlFor="message" className="text-xs font-bold text-navy-dark">Message</label>
+                <textarea
+                  id="message"
+                  name="user_message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="w-full border border-gray-250 px-4 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary/50 text-sm h-32 resize-none"
+                  required
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-navy-dark hover:bg-secondary text-white hover:text-navy-dark font-bold py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:pointer-events-none text-[15px]"
+              >
+                {isSubmitting ? 'Sending Message...' : 'Send Message'}
+              </button>
+            </form>
+          </div>
+
         </div>
-      </div>
+      </section>
+
+      {/* Google Maps Section */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div className="space-y-4 mb-6">
+          <h3 className="text-xl font-bold text-navy-dark flex items-center gap-2">
+            <FaMapMarkerAlt className="text-secondary" />
+            Clinic Location
+          </h3>
+          <p className="text-xs text-slate-neutral">
+            Unit 4 Office 3, Booth Drive, Park Farm Industrial Estate, Wellingborough, NN8 6GR. Ample free parking available outside.
+          </p>
+        </div>
+        <div className="rounded-2xl overflow-hidden shadow-premium border border-gray-150 h-[380px] w-full">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.6200234125746!2d-0.6698628!3d52.3048995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487777ca226d9e5f%3A0xe54e3d640245a4a5!2sBooth%20Dr%2C%20Wellingborough%20NN8%206GR!5e0!3m2!1sen!2suk!4v1700000000000"
+            className="w-full h-full border-none"
+            allowFullScreen=""
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Clinic Location Map"
+          ></iframe>
+        </div>
+      </section>
+
     </div>
   );
 };

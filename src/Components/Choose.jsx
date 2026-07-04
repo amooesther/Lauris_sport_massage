@@ -1,36 +1,73 @@
 import React from 'react';
 import { assets } from '../assets/assets';
+import { FaCheckCircle, FaAward, FaHeartbeat, FaRunning } from 'react-icons/fa';
 
 const Choose = () => {
-  return (
-    <div className="flex flex-col md:flex-row items-center justify-center gap-8 px-6 py-12 bg-gradient-to-r from-green-400 via-teal-500 to-blue-600 text-white">
-      {/* Left Content - Image */}
-      <div className="flex-1 space-y-4">
-        <img
-          src={assets.choose_img}
-          alt="Choose Us"
-          className="w-full rounded-lg shadow-2xl transform transition-transform duration-500 hover:scale-105"
-        />
-      </div>
+  const highlights = [
+    {
+      icon: <FaRunning className="w-6 h-6 text-secondary" />,
+      title: "Personalized Recovery Plans",
+      description: "We customize every session to fit your unique muscle tension, joints, and athletic goals, helping you get back on track faster."
+    },
+    {
+      icon: <FaAward className="w-6 h-6 text-secondary" />,
+      title: "Expert Clinical Specialists",
+      description: "Our certified therapists bring deep knowledge of musculoskeletal anatomy, injury management, and high-performance recovery."
+    },
+    {
+      icon: <FaHeartbeat className="w-6 h-6 text-secondary" />,
+      title: "Holistic Wellness Focus",
+      description: "We don't just treat localized pain—we focus on full-body circulation, stress reduction, and alignment to support longevity."
+    }
+  ];
 
-      {/* Right Content - Text */}
-      <div className="flex-1 space-y-6 text-center md:text-left">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate__animated animate__fadeIn">
-          Why Choose Us
-        </h2>
-        <ul className="space-y-4">
-          <li className="text-lg md:text-xl leading-relaxed animate__animated animate__fadeIn animate__delay-1s">
-            <strong>Personalized Recovery:</strong> We prioritize your recovery, amplify your performance, and tailor every session to your unique needs.
-          </li>
-          <li className="text-lg md:text-xl leading-relaxed animate__animated animate__fadeIn animate__delay-2s">
-            <strong>Expert Care:</strong> We bring expert care, personalized treatments, and a passion for your peak performance.
-          </li>
-          <li className="text-lg md:text-xl leading-relaxed animate__animated animate__fadeIn animate__delay-3s">
-            <strong>Well-Being Focus:</strong> We focus on your well-being, offering customized therapies to help you move better and feel stronger.
-          </li>
-        </ul>
+  return (
+    <section className="py-16 md:py-24 bg-transparent text-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+          
+          {/* Left: Professional Session Image */}
+          <div className="flex-1 w-full relative">
+            <div className="absolute inset-0 bg-secondary/5 rounded-3xl blur-2xl transform -translate-x-3 -translate-y-3 -z-10" />
+            <img
+              src={assets.laura_sports_massage}
+              alt="Professional Sports Massage Treatment"
+              className="w-full h-auto rounded-3xl shadow-premium border border-gray-100 object-cover aspect-[4/3] sm:aspect-[16/10] hover:scale-[1.01] transition-transform duration-500"
+            />
+          </div>
+
+          {/* Right: Modern Text Content */}
+          <div className="flex-1 space-y-8">
+            <div className="space-y-4">
+              <span className="text-secondary font-bold text-sm uppercase tracking-wider">Why Choose LauraPhys</span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-navy-dark">
+                Tailored Therapy for Your Peak Performance
+              </h2>
+              <p className="text-slate-neutral leading-relaxed">
+                At Lauraphys Wellness, we treat every client with specialized, targeted techniques. Whether you are recovering from a hard workout, managing chronic tension, or checking in for maintenance care, we support your wellness journey.
+              </p>
+            </div>
+
+            {/* Highlights Grid */}
+            <div className="space-y-6">
+              {highlights.map((item, idx) => (
+                <div key={idx} className="flex gap-4 p-4 rounded-xl hover:bg-slate-50 transition-colors duration-300">
+                  <div className="p-3 bg-teal-50 rounded-xl shrink-0 h-fit">
+                    {item.icon}
+                  </div>
+                  <div className="space-y-1.5">
+                    <h3 className="text-lg font-bold text-navy-dark">{item.title}</h3>
+                    <p className="text-sm text-slate-neutral leading-relaxed">{item.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+          
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

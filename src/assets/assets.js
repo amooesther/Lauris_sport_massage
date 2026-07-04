@@ -25,12 +25,16 @@ import contact_bg from '../assets/contact_bg.jpg'
 import serv_img from '../assets/serv_img.jpg'
 import email from '../assets/email.png'
 
-
-
+// New premium assets
+import laura_hero_clinic from '../assets/laura_hero_clinic.png'
+import laura_sports_massage from '../assets/laura_sports_massage.png'
+import laura_treatment_room from '../assets/laura_treatment_room.png'
+import laura_assisted_stretch from '../assets/laura_assisted_stretch.png'
+import laura_dry_needling from '../assets/laura_dry_needling.png'
 
 export const assets={
     logo,email,hero_img,serv_img,contact_bg,deep_tissue,about,event,injury_rehabilitation,chats_icon,
     joint,about2,personalize,post_event,relaxation,sport_performance,trigger,
-    Phone_icon,location_icon,foot_massage,clock,mail,logo_white,landing_page,choose,choose_img
-    
+    Phone_icon,location_icon,foot_massage,clock,mail,logo_white,landing_page,choose,choose_img,
+    laura_hero_clinic, laura_sports_massage, laura_treatment_room, laura_assisted_stretch, laura_dry_needling
 }
