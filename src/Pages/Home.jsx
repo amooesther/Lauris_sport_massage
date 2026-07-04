@@ -5,7 +5,6 @@ import Choose from '../Components/Choose';
 import Service from '../Components/Service';
 import ConditionsTreated from '../Components/ConditionsTreated';
 import TimelineProcess from '../Components/TimelineProcess';
-import MeetTeam from '../Components/MeetTeam';
 import SuccessStories from '../Components/SuccessStories';
 import Testimonials from '../Components/Testimonials';
 import Faq from '../Components/Faq';
@@ -33,10 +32,7 @@ const Home = () => {
       {/* 6. Step-by-Step Treatment Process */}
       <TimelineProcess />
 
-      {/* 7. Meet the Therapists */}
-      <MeetTeam />
-
-      {/* 8. Success Case Studies */}
+      {/* 7. Success Case Studies */}
       <SuccessStories />
 
       {/* 9. Client Reviews & Rating Badge */}

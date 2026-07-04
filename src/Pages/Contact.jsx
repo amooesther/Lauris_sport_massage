@@ -59,18 +59,32 @@ const ContactUs = () => {
     <div className="bg-soft-neutral min-h-screen">
       
       {/* Page Hero */}
-      <section className="relative bg-navy-dark text-white py-16 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-25 select-none pointer-events-none"
-          style={{ backgroundImage: `url(${assets.contact_bg})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy-dark via-navy-dark/95 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-3">
-          <span className="text-secondary font-bold text-sm uppercase tracking-wider">Get in Touch</span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">Contact Us</h1>
-          <p className="text-gray-300 text-lg max-w-xl">
-            Need clarification about our treatments or booking slots? We are here to support you.
-          </p>
+      <section className="relative bg-gradient-to-br from-stone-50 via-white to-stone-100 py-16 lg:py-24 overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-teal-50/80 to-transparent pointer-events-none" />
+        <div className="absolute top-20 left-20 w-72 h-72 bg-teal-100/30 rounded-full blur-3xl -z-10" />
+        <div className="absolute bottom-10 right-20 w-96 h-96 bg-stone-200/40 rounded-full blur-3xl -z-10" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+            <div className="flex-1 max-w-xl">
+              <span className="inline-block px-4 py-1.5 bg-teal-50 border border-teal-200 rounded-full text-teal-700 text-xs font-bold uppercase tracking-wider mb-4">
+                Get in Touch
+              </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-4">
+                Contact <span className="text-teal-600">Us</span>
+              </h1>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Need clarification about our treatments or booking slots? We're here to support you every step of the way.
+              </p>
+            </div>
+            <div className="flex-1 w-full max-w-md lg:max-w-none">
+              <img
+                src={assets.contact_bg}
+                alt="Contact Lauraphys Wellness"
+                className="w-full h-auto rounded-3xl shadow-xl object-cover aspect-[4/3]"
+              />
+            </div>
+          </div>
         </div>
       </section>
 

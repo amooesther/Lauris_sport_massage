@@ -6,10 +6,15 @@
 
 @layer base {
   body {
-    @apply font-body text-slate-700 bg-soft-neutral antialiased min-h-screen;
+    @apply font-body text-gray-800 antialiased min-h-screen;
+    background: #fafaf9;
+    background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading tracking-tight text-navy-dark;
+    @apply font-heading tracking-tight text-gray-900;
+  }
+  p {
+    @apply text-gray-600;
   }
 }
 
@@ -57,12 +62,12 @@
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #e7e5e4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #a8a29e;
   border-radius: 5px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #78716c;
 }
