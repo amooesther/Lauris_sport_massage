@@ -93,54 +93,57 @@ const Services = () => {
   };
 
   return (
-    <div className="bg-soft-neutral min-h-screen pb-16">
+    <div className="bg-soft-neutral min-h-screen pb-24">
       
       {/* Immersive Page Hero */}
-      <section className="relative bg-gradient-to-br from-stone-50 via-white to-teal-50 py-16 lg:py-24 overflow-hidden">
-        <div className="absolute top-0 left-0 w-1/2 h-full bg-gradient-to-r from-teal-100/30 to-transparent pointer-events-none" />
-        <div className="absolute top-20 right-32 w-80 h-80 bg-teal-200/30 rounded-full blur-3xl -z-10" />
-        <div className="absolute bottom-10 left-20 w-72 h-72 bg-stone-200/40 rounded-full blur-3xl -z-10" />
+      <section className="relative bg-gradient-to-b from-white via-slate-50/50 to-white py-16 lg:py-24 overflow-hidden">
+        {/* Soft background glows */}
+        <div className="absolute top-20 right-32 w-80 h-80 bg-secondary/5 rounded-full blur-3xl pointer-events-none -z-10" />
+        <div className="absolute bottom-10 left-20 w-72 h-72 bg-teal-light/30 rounded-full blur-3xl pointer-events-none -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
-            <div className="flex-1 max-w-xl">
-              <span className="inline-block px-4 py-1.5 bg-teal-50 border border-teal-200 rounded-full text-teal-700 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="flex-1 max-w-xl space-y-6">
+              <span className="inline-block px-4 py-1.5 bg-secondary/10 border border-secondary/20 rounded-full text-secondary text-xs font-bold uppercase tracking-wider">
                 What We Offer
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight mb-4">
-                Supporting a Healthy, <span className="text-teal-600">Active</span> and Pain-Free You
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-light tracking-tight text-navy-dark leading-tight">
+                Supporting a Healthy, <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Active</span> and Pain-Free You
               </h1>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-slate-neutral font-body font-light leading-relaxed">
                 From elite athletic prep to daily muscle maintenance, explore our range of clinical sports massage therapies.
               </p>
-              <div className="pt-6">
+              <div className="pt-2">
                 <Link to="/book">
-                  <button className="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-700 text-white font-bold py-3.5 px-8 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0">
+                  <button className="inline-flex items-center gap-3 bg-gradient-to-r from-secondary to-[#e89d43] hover:from-[#c27017] hover:to-secondary text-white font-bold py-4 px-10 rounded-2xl shadow-[0_10px_25px_-5px_rgba(217,131,30,0.35)] hover:shadow-[0_15px_30px_rgba(217,131,30,0.5)] transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-base font-heading">
                     Book Treatment Now
                   </button>
                 </Link>
               </div>
             </div>
             <div className="flex-1 w-full max-w-md lg:max-w-none">
-              <img
-                src={assets.serv_img}
-                alt="Lauraphys Wellness Services"
-                className="w-full h-auto rounded-3xl shadow-xl object-cover aspect-[4/3]"
-              />
+              <div className="relative">
+                <div className="absolute inset-0 bg-secondary/5 rounded-[2.5rem] blur-2xl transform -translate-x-3 -translate-y-3 -z-10" />
+                <img
+                  src={assets.serv_img}
+                  alt="Lauraphys Wellness Services"
+                  className="w-full h-auto rounded-[2.5rem] shadow-premium border border-gray-150/50 object-cover aspect-[4/3]"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
-
+ 
       {/* Services Grid Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <h2 className="text-3xl font-extrabold text-navy-dark">Our Therapy Catalog</h2>
+          <h2 className="text-3xl font-heading font-light tracking-tight text-navy-dark">Our Therapy <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Catalog</span></h2>
           <p className="text-slate-neutral text-sm md:text-base">
             Every session is customized by our certified therapists using one or more of these modalities to yield the best results for your body.
           </p>
         </div>
-
+ 
         <motion.div 
           className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
           initial="hidden"
@@ -151,38 +154,41 @@ const Services = () => {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-150 shadow-premium hover:shadow-premium-hover transition-all duration-300 flex flex-col justify-between group"
+              className="bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-gray-100/80 shadow-premium hover:shadow-premium-hover hover:border-secondary/20 hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group overflow-hidden"
               variants={cardVariants}
             >
               <div>
-                {/* Image */}
-                <div className="aspect-[16/10] overflow-hidden relative">
-                  <img
-                    src={service.img}
-                    alt={service.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-103"
-                  />
-                  <div className="absolute top-4 left-4 bg-white/90 backdrop-blur shadow-sm p-2.5 rounded-xl">
-                    {service.icon}
+                {/* Image Showcase - Framed Inset */}
+                <div className="p-4 pb-0">
+                  <div className="aspect-[16/10] overflow-hidden relative rounded-[2rem] shadow-sm border border-gray-100/50 bg-black/5">
+                    <img
+                      src={service.img}
+                      alt={service.title}
+                      className="w-full h-full object-cover transition-transform duration-750 group-hover:scale-105"
+                    />
+                    {/* Floating Glass Icon Badge */}
+                    <div className="absolute top-4 left-4 bg-white/95 backdrop-blur shadow-[0_8px_25px_rgba(0,0,0,0.05)] p-3 rounded-2xl border border-white/50 flex items-center justify-center text-secondary">
+                      {service.icon}
+                    </div>
                   </div>
                 </div>
 
-                {/* Text content */}
-                <div className="p-6 space-y-3">
-                  <h3 className="text-xl font-bold text-navy-dark group-hover:text-secondary transition-colors duration-200">
+                {/* Text Content */}
+                <div className="p-8 space-y-3">
+                  <h3 className="text-xl font-semibold text-navy-dark tracking-wide font-heading group-hover:text-secondary transition-colors duration-300">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-slate-neutral leading-relaxed">
+                  <p className="text-sm text-navy-light/90 leading-relaxed font-body">
                     {service.description}
                   </p>
                 </div>
               </div>
 
               {/* Direct Booking CTA */}
-              <div className="p-6 pt-0 mt-2 border-t border-gray-50 flex justify-end">
+              <div className="p-8 pt-0 border-t border-gray-50 flex justify-end">
                 <Link to="/book" className="w-full">
-                  <button className="w-full bg-slate-50 hover:bg-secondary hover:text-navy-dark text-navy-dark font-bold py-2.5 rounded-xl transition duration-300 text-xs flex items-center justify-center gap-1.5 border border-gray-150 hover:border-secondary">
-                    <FaCalendarCheck /> Book Session
+                  <button className="w-full bg-gradient-to-r from-navy-dark to-secondary hover:from-secondary hover:to-navy-dark text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-[0_4px_15px_-3px_rgba(27,29,29,0.25)] hover:shadow-[0_8px_25px_-4px_rgba(217,131,30,0.45)] transition-all duration-500 transform hover:-translate-y-0.5 active:translate-y-0 text-xs flex items-center justify-center gap-1.5 border border-transparent">
+                    <FaCalendarCheck className="w-3.5 h-3.5" /> Book Session
                   </button>
                 </Link>
               </div>
@@ -190,7 +196,7 @@ const Services = () => {
           ))}
         </motion.div>
       </section>
-
+ 
     </div>
   );
 };

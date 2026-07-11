@@ -1,4 +1,4 @@
-import logo from '../assets/Lauris.png';
+import logo from '../assets/lauraphys_luxury_logo.png';
 import hero_img from '../assets/hero_img.webp';
 import deep_tissue from '../assets/deep_tissue.jpg';
 import event from '../assets/event.jpg';

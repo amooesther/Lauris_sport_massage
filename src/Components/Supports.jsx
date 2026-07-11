@@ -50,8 +50,8 @@ const Supports = () => {
                 <FaHeartbeat />
                 <span>Our Philosophy</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-navy-dark leading-tight">
-                Welcome to Lauraphys Wellness center
+              <h2 className="text-3xl md:text-4xl font-heading font-light tracking-tight text-navy-dark leading-tight">
+                Welcome to <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Lauraphys Wellness</span>
               </h2>
             </div>
             

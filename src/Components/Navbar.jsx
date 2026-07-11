@@ -39,7 +39,9 @@ const Navbar = () => {
         {/* Logo */}
         <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
           <img
-            className="w-auto h-12 md:h-16 transition-transform duration-300 hover:scale-102"
+            className={`w-auto h-16 md:h-24 transition-all duration-300 hover:scale-105 filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)] ${
+              isScrolled ? "brightness-95 contrast-110" : "brightness-105 contrast-105"
+            }`}
             src={assets.logo}
             alt="LauraPhys Logo"
           />

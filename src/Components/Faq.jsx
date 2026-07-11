@@ -42,8 +42,8 @@ const Faq = () => {
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
           <span className="text-secondary font-bold text-sm uppercase tracking-wider">FAQ</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-navy-dark">
-            Frequently Asked Questions
+          <h2 className="text-3xl md:text-4xl font-heading font-light tracking-tight text-navy-dark">
+            Frequently Asked <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Questions</span>
           </h2>
           <p className="text-slate-neutral">
             Have questions about your upcoming treatment? Find quick answers below.

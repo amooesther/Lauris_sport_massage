@@ -42,42 +42,66 @@ const Home = () => {
       <Faq />
 
       {/* 11. Final High-Impact Booking CTA Banner */}
-      <section className="bg-navy-dark text-white py-16 md:py-24 relative overflow-hidden border-t border-gray-800">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(13,148,136,0.15),transparent_50%)]" />
-        
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
-          <div className="space-y-4">
-            <span className="text-secondary font-bold text-sm uppercase tracking-wider">Start Your Recovery Today</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold leading-tight">
-              Ready to Perform Pain-Free?
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Book your customized sports massage therapy session in Wellingborough NN8 today and experience professional, clinical recovery care.
-            </p>
-          </div>
+      <section className="relative py-24 md:py-32 overflow-hidden bg-white text-white">
+        {/* Soft background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-secondary/10 rounded-full filter blur-[120px] pointer-events-none -z-10" />
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/book" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-accent-gold hover:bg-amber-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 text-base">
-                <FaCalendarAlt />
-                Book Your Appointment
-              </button>
-            </Link>
-            <a href="tel:+447391530988" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-gray-600 hover:border-white hover:bg-white/10 text-white font-bold py-3.5 px-8 rounded-xl transition duration-300 text-base">
-                Call +44 7391 530988
-              </button>
-            </a>
-          </div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          
+          {/* Main Glowing Container Card */}
+          <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-navy-dark via-navy-deep to-navy-dark border border-white/[0.08] shadow-[0_30px_100px_rgba(27,29,29,0.25)] py-16 md:py-24 px-6 md:px-12 text-center group">
+            
+            {/* Background luxury gradient patterns */}
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(217,131,30,0.12),transparent_45%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(217,131,30,0.08),transparent_40%)]" />
+            <div className="absolute -inset-y-1/2 -inset-x-1/2 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.015),transparent_60%)] group-hover:scale-110 transition-transform duration-1000 pointer-events-none" />
 
-          <div className="flex items-center justify-center gap-2 text-xs text-gray-500 pt-4">
-            <div className="flex text-amber-500">
-              {[...Array(5)].map((_, i) => (
-                <FaStar key={i} className="w-3.5 h-3.5 fill-current" />
-              ))}
+            <div className="max-w-4xl mx-auto space-y-10 relative z-10">
+              
+              {/* Header Info */}
+              <div className="space-y-4">
+                <span className="text-secondary font-semibold text-xs uppercase tracking-[0.25em] block">
+                  Start Your Recovery Today
+                </span>
+                <h2 className="text-3xl md:text-5xl font-heading font-light tracking-tight text-white leading-tight">
+                  Ready to <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-secondary to-white">Perform Pain-Free?</span>
+                </h2>
+                <div className="w-16 h-[2px] bg-secondary mx-auto mt-6 rounded-full opacity-80" />
+                <p className="text-slate-neutral text-[16px] md:text-lg leading-relaxed max-w-2xl mx-auto pt-2 font-body font-light">
+                  Book your customized sports massage therapy session in Wellingborough NN8 today and experience professional, clinical recovery care.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-5 pt-2">
+                <Link to="/book" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-gradient-to-r from-secondary to-[#e89d43] hover:from-[#c27017] hover:to-secondary text-white font-bold py-4 px-10 rounded-2xl shadow-[0_10px_25px_-5px_rgba(217,131,30,0.35)] hover:shadow-[0_15px_30px_rgba(217,131,30,0.5)] transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-base font-heading">
+                    <FaCalendarAlt className="w-4 h-4" />
+                    Book Your Appointment
+                  </button>
+                </Link>
+                <a href="tel:+447391530988" className="w-full sm:w-auto">
+                  <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/[0.04] border border-white/10 hover:border-white/30 hover:bg-white/[0.08] text-white font-medium py-4 px-10 rounded-2xl transition duration-300 text-base font-heading shadow-md hover:-translate-y-1">
+                    Call +44 7391 530988
+                  </button>
+                </a>
+              </div>
+
+              {/* Trust Badge */}
+              <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-sm select-none">
+                <div className="flex text-secondary">
+                  {[...Array(5)].map((_, i) => (
+                    <FaStar key={i} className="w-3.5 h-3.5 fill-current" />
+                  ))}
+                </div>
+                <span className="text-xs text-gray-400 font-body font-light tracking-wide">
+                  5-Star Rated Sports Injury & Recovery Clinic
+                </span>
+              </div>
+
             </div>
-            <span>5-Star Rated sports injury and recovery center in Wellingborough</span>
           </div>
+          
         </div>
       </section>
     </div>

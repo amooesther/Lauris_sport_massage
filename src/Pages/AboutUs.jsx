@@ -72,7 +72,7 @@ const AboutUs = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-3xl font-extrabold text-navy-dark">Our Mission & Vision</h2>
+            <h2 className="text-3xl font-heading font-light tracking-tight text-navy-dark">Our <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Mission & Vision</span></h2>
             <p className="text-slate-neutral text-sm">Our primary goals and focus as recovery practitioners.</p>
           </div>
 
@@ -103,7 +103,7 @@ const AboutUs = () => {
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
             <span className="text-secondary font-bold text-xs uppercase tracking-wider">What We Stand For</span>
-            <h2 className="text-3xl font-extrabold text-navy-dark">Our Core Values</h2>
+            <h2 className="text-3xl font-heading font-light tracking-tight text-navy-dark">Our <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Core Values</span></h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -126,7 +126,7 @@ const AboutUs = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-3xl font-extrabold text-navy-dark">Clinic Information</h2>
+            <h2 className="text-3xl font-heading font-light tracking-tight text-navy-dark">Clinic <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Information</span></h2>
             <p className="text-slate-neutral text-sm">Quick reference details for all bookings and enquiries.</p>
           </div>
 

@@ -40,8 +40,8 @@ const Choose = () => {
           <div className="flex-1 space-y-8">
             <div className="space-y-4">
               <span className="text-secondary font-bold text-sm uppercase tracking-wider">Why Choose LauraPhys</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-navy-dark">
-                Tailored Therapy for Your Peak Performance
+              <h2 className="text-3xl md:text-4xl font-heading font-light tracking-tight text-navy-dark">
+                Tailored Therapy for Your <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Peak Performance</span>
               </h2>
               <p className="text-slate-neutral leading-relaxed">
                 At Lauraphys Wellness, we treat every client with specialized, targeted techniques. Whether you are recovering from a hard workout, managing chronic tension, or checking in for maintenance care, we support your wellness journey.

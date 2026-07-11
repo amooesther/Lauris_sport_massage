@@ -10,7 +10,7 @@ const Footer = () => {
         
         {/* Column 1: Brand & Logo */}
         <div className="space-y-6">
-          <img src={assets.logo} alt="Lauraphys Logo" className="h-16 w-auto brightness-110" />
+          <img src={assets.logo} alt="Lauraphys Logo" className="h-20 md:h-28 w-auto brightness-110 filter drop-shadow-[0_4px_12px_rgba(0,0,0,0.25)]" />
           <p className="text-[14px] text-gray-400 leading-relaxed">
             Lauraphys Wellness LTD provides premium sports massage therapy and musculoskeletal recovery programs tailored to athletes and active individuals. Move pain-free and perform at your peak.
           </p>

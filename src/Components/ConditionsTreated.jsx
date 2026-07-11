@@ -46,8 +46,8 @@ const ConditionsTreated = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-secondary font-bold text-sm uppercase tracking-wider">Clinical Care</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white">
-            Conditions We Treat
+          <h2 className="text-3xl md:text-4xl font-heading font-light tracking-tight text-white">
+            Conditions We <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-secondary to-white">Treat</span>
           </h2>
           <p className="text-gray-300 text-lg">
             Sports massage therapy is highly effective for both athletic performance and everyday musculoskeletal discomfort.

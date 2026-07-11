@@ -35,8 +35,8 @@ const Testimonials = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 mb-16">
           <div className="space-y-4 text-center lg:text-left">
             <span className="text-secondary font-bold text-sm uppercase tracking-wider">Testimonials</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-navy-dark">
-              What Our Clients Say
+            <h2 className="text-3xl md:text-4xl font-heading font-light tracking-tight text-navy-dark">
+              What Our <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Clients Say</span>
             </h2>
             <p className="text-slate-neutral text-lg max-w-xl">
               Hear from local athletes, active parents, and office professionals who trust us with their muscle recovery and pain management.

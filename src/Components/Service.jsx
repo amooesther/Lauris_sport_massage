@@ -37,8 +37,8 @@ const Service = () => {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <span className="text-secondary font-bold text-sm uppercase tracking-wider">What We Do</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold text-navy-dark">
-            Clinical Sports & Recovery Massages
+          <h2 className="text-3xl md:text-5xl font-heading font-light tracking-tight text-navy-dark">
+            Clinical Sports & <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Recovery Massages</span>
           </h2>
           <p className="text-slate-neutral text-lg">
             We offer specialized manual therapy techniques designed to improve performance, accelerate recovery, and provide therapeutic pain relief.
@@ -91,36 +91,93 @@ const Service = () => {
         </div>
 
         {/* Video Highlights Header */}
-        <div className="text-center mt-24 mb-10 space-y-2">
-          <h3 className="text-2xl font-bold text-navy-dark">Session Demonstrations</h3>
-          <p className="text-sm text-slate-neutral">Watch our specialists perform treatments and mobility guidance.</p>
+        <div className="text-center mt-24 mb-16 space-y-4">
+          <span className="text-secondary font-semibold text-xs uppercase tracking-[0.25em] block">
+            Watch Us Work
+          </span>
+          <h3 className="text-3xl md:text-5xl font-heading font-light tracking-tight text-navy-dark">
+            Session <span className="font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-navy-dark via-secondary to-navy-dark">Demonstrations</span>
+          </h3>
+          <div className="w-16 h-[2px] bg-secondary mx-auto mt-6 rounded-full opacity-80" />
+          <p className="text-slate-neutral text-[16px] md:text-lg leading-relaxed max-w-2xl mx-auto pt-2 font-body">
+            Watch our specialists perform clinical assessments, massage work, and guided movement protocols.
+          </p>
         </div>
 
-        {/* Videos Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Videos Grid - Upgraded to 2-Column layout for cinema-feel larger players */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 relative">
           {[
-            'https://vimeo.com/1059641016',
-            'https://vimeo.com/1059651884',
-            'https://vimeo.com/1059652678/3b4a672817',
-            'https://vimeo.com/1059653101/ffc6521aa0',
-          ].map((videoUrl, index) => (
-            <div key={index} className="rounded-xl overflow-hidden shadow-md border border-white/60 bg-white/20 backdrop-blur-md aspect-video hover:shadow-lg transition-shadow duration-300">
-              <ReactPlayer
-                url={videoUrl}
-                controls
-                width="100%"
-                height="100%"
-                light={true}
-              />
+            {
+              url: 'https://vimeo.com/1059641016',
+              category: 'Deep Tissue Release',
+              title: 'Trigger Point & Muscle Stripping',
+              desc: 'Clinical soft tissue work focusing on deep muscle layers to alleviate chronic tightness and improve circulation.'
+            },
+            {
+              url: 'https://vimeo.com/1059651884',
+              category: 'Dry Needling',
+              title: 'Intramuscular Stimulation Therapy',
+              desc: 'Precise dry needling techniques designed to release hyperirritable trigger points and reset neural tension.'
+            },
+            {
+              url: 'https://vimeo.com/1059652678/3b4a672817',
+              category: 'Assisted Stretching',
+              title: 'PNF Mobility & Joint Flex',
+              desc: 'Dynamic assisted stretching protocols performed by therapists to improve immediate range of motion.'
+            },
+            {
+              url: 'https://vimeo.com/1059653101/ffc6521aa0',
+              category: 'Injury Rehabilitation',
+              title: 'Orthopedic Joint Assessment',
+              desc: 'Evaluating structural movement patterns and joint mechanics to isolate tension sources and map a recovery path.'
+            }
+          ].map((video, index) => (
+            <div 
+              key={index} 
+              className="relative group bg-white/70 backdrop-blur-md border border-gray-100/80 rounded-[2.5rem] p-6 shadow-premium hover:shadow-premium-hover hover:border-secondary/20 hover:-translate-y-1.5 transition-all duration-500 flex flex-col justify-between"
+            >
+              {/* Video frame with subtle glow */}
+              <div className="relative rounded-3xl overflow-hidden aspect-video shadow-lg border border-gray-100/50 bg-black/90 group-hover:scale-[1.01] transition-transform duration-500 z-10">
+                {/* Inner soft border overlay */}
+                <div className="absolute inset-0 border border-white/5 rounded-3xl z-20 pointer-events-none" />
+                <ReactPlayer
+                  url={video.url}
+                  controls
+                  width="100%"
+                  height="100%"
+                  light={true}
+                  playIcon={
+                    <div className="w-16 h-16 rounded-full bg-white/95 backdrop-blur-sm shadow-xl flex items-center justify-center text-secondary hover:text-white hover:bg-secondary hover:scale-110 transition-all duration-300">
+                      <svg className="w-6 h-6 fill-current translate-x-0.5" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  }
+                />
+              </div>
+
+              {/* Content Block */}
+              <div className="mt-6 px-3 space-y-2 relative z-10">
+                <span className="text-secondary font-semibold text-[10px] uppercase tracking-[0.2em] block">
+                  {video.category}
+                </span>
+                <h4 className="text-xl font-semibold text-navy-dark tracking-wide font-heading group-hover:text-secondary transition-colors duration-300">
+                  {video.title}
+                </h4>
+                <p className="text-[14px] text-navy-light/95 font-body leading-relaxed">
+                  {video.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>
 
         {/* View More Button */}
-        <div className="text-center mt-16">
+        <div className="text-center mt-20">
           <Link to="/services">
-            <button className="bg-navy-dark hover:bg-navy-light text-white font-bold py-3.5 px-8 rounded-xl shadow-md transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 text-[15px]">
+            <button className="inline-flex items-center gap-2.5 bg-gradient-to-r from-navy-dark to-navy-deep hover:from-[#c27017] hover:to-secondary text-white font-semibold py-4 px-10 rounded-2xl shadow-premium hover:shadow-[0_10px_25px_-5px_rgba(27,29,29,0.25)] transition-all duration-300 transform hover:-translate-y-1 active:translate-y-0 text-base font-heading">
               Explore All Services
+              <FaChevronRight className="w-3 h-3 text-secondary group-hover:text-white" />
             </button>
           </Link>
         </div>
