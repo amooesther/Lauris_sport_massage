@@ -107,7 +107,7 @@ const Navbar = () => {
 
       {/* Mobile Drawer Navigation */}
       <div
-        className={`fixed inset-0 top-[60px] md:top-[80px] bg-white z-40 flex flex-col justify-between border-t border-gray-100 transition-all duration-300 transform ${
+        className={`absolute top-full left-0 w-full h-[calc(100vh-100%)] bg-white z-50 flex flex-col justify-between border-t border-gray-100 transition-all duration-300 transform ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
